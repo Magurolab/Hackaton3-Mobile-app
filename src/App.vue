@@ -55,7 +55,6 @@
               <p>Click Sign In to close Login Screen</p>
             </f7-block-footer>
           </f7-list>
-
         </f7-page>
       </f7-view>
     </f7-login-screen>

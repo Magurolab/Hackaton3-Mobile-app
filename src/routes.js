@@ -12,6 +12,7 @@ import SignupPage from './pages/Authenticate/signup'
 
 import AddItemPage from './pages/Items/AddItem.vue';
 import WishListPage from './pages/Items/WishList';
+import BuyPage from './pages/Items/buy';
 
 import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
@@ -50,6 +51,10 @@ export default [
   {
     path: '/wish-list/',
     component: WishListPage,
+  },
+  {
+    path: '/home/',
+    component: BuyPage,
   },
   {
     path: '/inbox/',
