@@ -6,9 +6,10 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import Framework7Vue from 'framework7-vue'
+  export default {
+    name: 'App'
+  }
 </script>
 
 <style>
