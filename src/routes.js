@@ -1,6 +1,6 @@
 import HomePage from './pages/home.vue';
 import AboutPage from './pages/about.vue';
-import FormPage from './pages/form.vue';
+
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/Authenticate/not-found.vue';
 
@@ -9,20 +9,21 @@ import PanelRightPage from './pages/panel-right.vue';
 
 import SigninPage from './pages/Authenticate/signin'
 import SignupPage from './pages/Authenticate/signup'
+import AddItemPage from './pages/AddItem.vue';
 
 export default [
-  // {
-  //   path: '/',
-  //   component: HomePage,
-  // },
   {
     path: '/',
-    component: SigninPage,
+    component: HomePage,
   },
-  {
-    path: '/signup/',
-    component: SignupPage,
-  },
+  // {
+  //   path: '/',
+  //   component: SigninPage,
+  // },
+  // {
+  //   path: '/signup/',
+  //   component: SignupPage,
+  // },
   {
     path: '/panel-left/',
     component: PanelLeftPage,
@@ -36,8 +37,8 @@ export default [
     component: AboutPage,
   },
   {
-    path: '/form/',
-    component: FormPage,
+    path: '/add-item/',
+    component: AddItemPage,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

@@ -22,7 +22,7 @@
     <f7-block-title>Navigation</f7-block-title>
     <f7-list>
       <f7-list-item link="/about/" title="About"></f7-list-item>
-      <f7-list-item link="/form/" title="Form"></f7-list-item>
+      <f7-list-item link="/add-item/" title="Add Item"></f7-list-item>
     </f7-list>
 
     <f7-block-title>Modals</f7-block-title>
