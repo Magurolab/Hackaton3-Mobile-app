@@ -16,6 +16,8 @@ import WishListPage from './pages/Items/WishList';
 import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
 
+import ProfilePage from './pages/User/Profile';
+
 export default [
   {
     path: '/',
@@ -56,6 +58,10 @@ export default [
   {
     path: '/chatbox/',
     component: ChatboxPage,
+  },
+  {
+    path: '/profile/',
+    component: ProfilePage,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

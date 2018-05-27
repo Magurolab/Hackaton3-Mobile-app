@@ -25,6 +25,7 @@
       <f7-list-item link="/add-item/" title="Add Item"></f7-list-item>
       <f7-list-item link="/wish-list/" title="Wish list"></f7-list-item>
       <f7-list-item link="/inbox/" title="Inbox"></f7-list-item>
+      <f7-list-item link="/profile/" title="My account"></f7-list-item>
     </f7-list>
 
     <f7-block-title>Modals</f7-block-title>

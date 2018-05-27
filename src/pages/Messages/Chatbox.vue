@@ -44,7 +44,7 @@
     </f7-messagebar>
 
     <f7-messages>
-      ...
+      ...(from data base)
     </f7-messages>
   </f7-page>
 </template>
