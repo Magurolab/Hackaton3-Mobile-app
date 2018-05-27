@@ -9,7 +9,8 @@ import PanelRightPage from './pages/panel-right.vue';
 
 import SigninPage from './pages/Authenticate/signin'
 import SignupPage from './pages/Authenticate/signup'
-import AddItemPage from './pages/AddItem.vue';
+import AddItemPage from './pages/Items/AddItem.vue';
+import WishListPage from './pages/Items/WishList';
 
 export default [
   {
@@ -39,6 +40,10 @@ export default [
   {
     path: '/add-item/',
     component: AddItemPage,
+  },
+  {
+    path: '/wish-list/',
+    component: WishListPage,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
