@@ -13,7 +13,8 @@ import SignupPage from './pages/Authenticate/signup'
 import AddItemPage from './pages/Items/AddItem.vue';
 import WishListPage from './pages/Items/WishList';
 
-import InboxPage from './pages/Messages/Inbox'
+import InboxPage from './pages/Messages/Inbox';
+import ChatboxPage from './pages/Messages/Chatbox';
 
 export default [
   {
@@ -51,6 +52,10 @@ export default [
   {
     path: '/inbox/',
     component: InboxPage,
+  },
+  {
+    path: '/chatbox/',
+    component: ChatboxPage,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
