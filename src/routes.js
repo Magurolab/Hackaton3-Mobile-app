@@ -7,7 +7,8 @@ import NotFoundPage from './pages/Authenticate/not-found.vue';
 import PanelLeftPage from './pages/panel-left.vue';
 import PanelRightPage from './pages/panel-right.vue';
 
-import Signin from './pages/Authenticate/signin'
+import SigninPage from './pages/Authenticate/signin'
+import SignupPage from './pages/Authenticate/signup'
 
 export default [
   // {
@@ -16,11 +17,11 @@ export default [
   // },
   {
     path: '/',
-    component: Signin,
+    component: SigninPage,
   },
   {
-    path: '/',
-    component: Signin,
+    path: '/signup/',
+    component: SignupPage,
   },
   {
     path: '/panel-left/',

@@ -17,8 +17,8 @@
       <f7-block-footer>
         <p>Don't have an account ? </p>
       </f7-block-footer>
-      <f7-link href="/signup/">Signup for Aibay</f7-link>
     </f7-list>
+    <f7-link href="/signup/">Signup for Aibay</f7-link>
   </f7-page>
 </template>
 
