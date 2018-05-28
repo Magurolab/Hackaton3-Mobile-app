@@ -25,7 +25,7 @@ export default [
     component: HomePage,
   },
   {
-    path: '/',
+    path: '/signin/',
     component: SigninPage,
   },
   {
