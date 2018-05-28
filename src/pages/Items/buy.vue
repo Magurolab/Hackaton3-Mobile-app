@@ -8,11 +8,11 @@
 
     </f7-navbar>
     <f7-toolbar tabbar labels>
-      <f7-link icon="home" text="Tab 1" tab-link="#tab1"></f7-link>
-      <f7-link icon="icon-2" text="Tab 2" tab-link="#tab2"></f7-link>
-      <f7-link icon="icon-1" text="Tab 1" tab-link="#tab1"></f7-link>
-      <f7-link icon="icon-2" text="Tab 2" tab-link="#tab2"></f7-link>
-      <f7-link icon="icon-2" text="Tab 2" tab-link="#tab2"></f7-link>
+      <f7-link tab-link="#tab1"> <f7-icon f7="home_fill"></f7-icon> </f7-link>
+      <f7-link tab-link="#tab2"> <f7-icon f7="search"></f7-icon> </f7-link>
+      <f7-link tab-link="#tab1"> <f7-icon f7="add_around"></f7-icon> </f7-link>
+      <f7-link tab-link="#tab2"> <f7-icon f7="heart_fill"></f7-icon> </f7-link>
+      <f7-link tab-link="#tab2"> <f7-icon f7="person_fill"></f7-icon> </f7-link>
     </f7-toolbar>
   </f7-page>
 </template>

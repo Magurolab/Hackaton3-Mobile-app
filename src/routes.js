@@ -24,14 +24,14 @@ export default [
     path: '/',
     component: HomePage,
   },
-  // {
-  //   path: '/',
-  //   component: SigninPage,
-  // },
-  // {
-  //   path: '/signup/',
-  //   component: SignupPage,
-  // },
+  {
+    path: '/',
+    component: SigninPage,
+  },
+  {
+    path: '/signup/',
+    component: SignupPage,
+  },
   {
     path: '/panel-left/',
     component: PanelLeftPage,
