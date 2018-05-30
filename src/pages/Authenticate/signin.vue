@@ -17,7 +17,7 @@
         title="Sign In"
         login-screen-close></f7-list-button>
       <f7-block-footer>
-        <p>Don't have an account ? {{this.password}} </p>
+        <p>Don't have an account ?</p>
         <f7-link href="/signup/">Signup for Aibay</f7-link>
       </f7-block-footer>
     </f7-list>
@@ -29,7 +29,7 @@
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
   import { auth, db } from '../../firebase'
-  
+
   export default {
     data () {
       return {
