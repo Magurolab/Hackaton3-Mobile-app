@@ -1,6 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar title="Wish list" back-link="Back"></f7-navbar>
+
     <div class="card demo-facebook-card">
       <div class="card-header">
         <div class="demo-facebook-avatar"><img src="http://lorempixel.com/68/68/people/1/" width="34" height="34"/></div>
@@ -9,7 +10,6 @@
       </div>
       <div class="card-content card-content-padding">
         <p>What a nice photo i took yesterday!</p><img src="http://lorempixel.com/1000/700/nature/8/" width="100%"/>
-        <p class="likes">Likes: 112    Comments: 43</p>
       </div>
       <div class="card-footer">
       </div>
@@ -19,7 +19,8 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+  }
 </script>
 
 <style scoped>
