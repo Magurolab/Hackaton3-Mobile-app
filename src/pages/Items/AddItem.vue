@@ -8,6 +8,12 @@
         <f7-input type="text" placeholder="Name"></f7-input>
       </f7-list-item>
       <f7-list-item>
+        <div>
+          <p>My File Selector: <file-select name="file"></file-select></p>
+          <p v-if="file">{{file.name}}</p>
+        </div>
+      </f7-list-item>
+      <f7-list-item>
         <f7-label>Category</f7-label>
         <f7-input type="select">
           <option value="Book">Book</option>
@@ -38,5 +44,20 @@
 </template>
 
 <script>
-export default {}
+import F7List from "framework7-vue/src/components/list";
+import F7ListItem from "framework7-vue/src/components/list-item";
+import FileSelect from './../../components/Items/FileSelect'
+
+export default {
+  components: {
+    F7ListItem,
+    F7List,
+    FileSelect
+  },
+  data() {
+    return {
+      file: null
+    }
+  }
+}
 </script>
