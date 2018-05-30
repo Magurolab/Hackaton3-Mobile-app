@@ -13,7 +13,6 @@
     props: {
       value: File
     },
-
     methods: {
       handleFileChange (e) {
         this.$emit('input', e.target.files[0])
@@ -34,7 +33,6 @@
     text-align: center;
     font-weight: bold;
   }
-
   .file-select > input[type="file"] {
     display: none;
   }

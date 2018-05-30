@@ -15,7 +15,8 @@
       <f7-list-button
         @click="userSignIn"
         title="Sign In"
-        login-screen-close></f7-list-button>
+        login-screen-close>
+      </f7-list-button>
       <f7-block-footer>
         <p>Don't have an account ?</p>
         <f7-link href="/signup/">Signup for Aibay</f7-link>
