@@ -18,6 +18,7 @@ import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
 
 import ProfilePage from './pages/User/Profile';
+import UploadPhoto from './pages/TestUploadPhoto'
 
 export default [
   {
@@ -67,6 +68,10 @@ export default [
   {
     path: '/profile/',
     component: ProfilePage,
+  },
+  {
+    path: '/photo/',
+    component: UploadPhoto,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

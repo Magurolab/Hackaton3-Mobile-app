@@ -33,6 +33,7 @@
       <f7-list-item link="/home/" title="Home"></f7-list-item>
       <f7-list-item link="/signin/" title="Sign In"></f7-list-item>
       <f7-list-item link="/signup/" title="Sign Up"></f7-list-item>
+      <f7-list-item link="/photo/" title="Upload Photo"></f7-list-item>
 
     </f7-list>
 
