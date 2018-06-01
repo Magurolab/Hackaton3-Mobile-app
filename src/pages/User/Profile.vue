@@ -11,12 +11,36 @@
         <p>University</p>
         <p>Description</p>
       </div>
+      <f7-button @click="signOut" >Log out</f7-button>
     </div>
 
   </f7-page>
 </template>
 <script>
-  export default {}
+  import F7View from "framework7-vue/src/components/view";
+  import F7Page from "framework7-vue/src/components/page";
+  import { auth, db } from '../../firebase'
+
+  export default {
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    components: {
+      F7Page,
+      F7View,
+      auth, db
+    },
+    methods: {
+      signOut() {
+        auth.signOut()
+        this.$f7.router.load('/signin/')
+      }
+    }
+  }
+
 </script>
 
 <style scoped>

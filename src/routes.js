@@ -1,3 +1,5 @@
+import Tabs from './pages/Tabs.vue';
+
 import HomePage from './pages/home.vue';
 import AboutPage from './pages/about.vue';
 
@@ -22,7 +24,11 @@ import ProfilePage from './pages/User/Profile';
 export default [
   {
     path: '/',
-    component: HomePage,
+    component: Tabs,
+  },
+  {
+    path: '/home/',
+    component: HomePage
   },
   {
     path: '/signin/',

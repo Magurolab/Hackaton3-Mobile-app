@@ -9,10 +9,17 @@
         <f7-input @input="name = $event.target.value" type="text" placeholder="Name"></f7-input>
       </f7-list-item>
 
+      <!--<f7-list-item>-->
+        <!--<div>-->
+          <!--<p>My File Selector: <file-select :value="file" @input="file = $event.target.value" ></file-select></p>-->
+          <!--<p v-if="file">{{file.name}}</p>-->
+        <!--</div>-->
+      <!--</f7-list-item>-->
+
       <f7-list-item>
         <div>
-          <p>My File Selector: <file-select :value="file" @input="file = $event.target.value" ></file-select></p>
-          <p v-if="file">{{file.name}}</p>
+          <f7-label>Photo</f7-label>
+          <f7-button> Add a photo</f7-button>
         </div>
       </f7-list-item>
 
@@ -60,9 +67,13 @@
 import F7List from "framework7-vue/src/components/list";
 import F7ListItem from "framework7-vue/src/components/list-item";
 import FileSelect from './../../components/Items/FileSelect'
+import F7Button from "framework7-vue/src/components/button";
+import F7Label from "framework7-vue/src/components/label";
 
 export default {
   components: {
+    F7Label,
+    F7Button,
     F7ListItem,
     F7List,
     FileSelect,
@@ -79,6 +90,26 @@ export default {
   },
 
   methods: {
+    takePhoto () {
+      let opts = {
+        quality: 80,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        mediaType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK,
+        targetWidth: 300,
+        targetHeight: 400
+      };
+      navigator.camera.getPicture(app.ftw, app.wtf, opts);
+    },
+    ftw () {
+      document.getElementById('msg').textContent = imgURI;
+      document.getElementById('photo').src = imgURI;
+    },
+    wtf () {
+      document.getElementById('msg').textContent = msg;
+    },
     addItem () {
       console.log(this.description)
 
