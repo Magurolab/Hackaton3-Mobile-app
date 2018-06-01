@@ -220,6 +220,45 @@ module.exports = [
     "clobbers": [
       "window.FileTransfer"
     ]
+  },
+  {
+    "id": "cordova-plugin-device.device",
+    "file": "plugins/cordova-plugin-device/www/device.js",
+    "pluginId": "cordova-plugin-device",
+    "clobbers": [
+      "device"
+    ]
+  },
+  {
+    "id": "cordova-plugin-chrome-apps-common.events",
+    "file": "plugins/cordova-plugin-chrome-apps-common/events.js",
+    "pluginId": "cordova-plugin-chrome-apps-common",
+    "clobbers": [
+      "chrome.Event"
+    ]
+  },
+  {
+    "id": "cordova-plugin-chrome-apps-common.errors",
+    "file": "plugins/cordova-plugin-chrome-apps-common/errors.js",
+    "pluginId": "cordova-plugin-chrome-apps-common"
+  },
+  {
+    "id": "cordova-plugin-chrome-apps-common.stubs",
+    "file": "plugins/cordova-plugin-chrome-apps-common/stubs.js",
+    "pluginId": "cordova-plugin-chrome-apps-common"
+  },
+  {
+    "id": "cordova-plugin-chrome-apps-common.helpers",
+    "file": "plugins/cordova-plugin-chrome-apps-common/helpers.js",
+    "pluginId": "cordova-plugin-chrome-apps-common"
+  },
+  {
+    "id": "cordova-plugin-chrome-apps-sockets-tcp.sockets.tcp",
+    "file": "plugins/cordova-plugin-chrome-apps-sockets-tcp/sockets.tcp.js",
+    "pluginId": "cordova-plugin-chrome-apps-sockets-tcp",
+    "clobbers": [
+      "chrome.sockets.tcp"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -228,7 +267,10 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-camera": "4.0.3",
   "cordova-plugin-file": "6.0.1",
-  "cordova-plugin-file-transfer": "1.7.1"
+  "cordova-plugin-file-transfer": "1.7.1",
+  "cordova-plugin-device": "2.0.2",
+  "cordova-plugin-chrome-apps-common": "1.0.7",
+  "cordova-plugin-chrome-apps-sockets-tcp": "1.3.7"
 };
 // BOTTOM OF METADATA
 });

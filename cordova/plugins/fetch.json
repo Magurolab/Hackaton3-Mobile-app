@@ -10,7 +10,7 @@
   "cordova-plugin-camera": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-camera@4.0.3"
+      "id": "cordova-plugin-camera@^4.0.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -27,6 +27,30 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-file@>=5.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-chrome-apps-sockets-tcp": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-chrome-apps-sockets-tcp"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-chrome-apps-common": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-chrome-apps-common@1"
     },
     "is_top_level": false,
     "variables": {}

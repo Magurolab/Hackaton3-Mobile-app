@@ -15,10 +15,19 @@
     },
     "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-chrome-apps-sockets-tcp": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-chrome-apps-common": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   }
