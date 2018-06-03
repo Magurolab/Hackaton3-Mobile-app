@@ -1,3 +1,5 @@
+import Tabs from './pages/Tabs.vue';
+
 import HomePage from './pages/home.vue';
 import AboutPage from './pages/about.vue';
 
@@ -18,11 +20,16 @@ import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
 
 import ProfilePage from './pages/User/Profile';
+import Upload from './pages/TestUpload'
 
 export default [
   {
     path: '/',
-    component: HomePage,
+    component: Tabs,
+  },
+  {
+    path: '/home/',
+    component: HomePage
   },
   {
     path: '/signin/',
@@ -67,6 +74,10 @@ export default [
   {
     path: '/profile/',
     component: ProfilePage,
+  },
+  {
+    path: '/photo/',
+    component: Upload,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
