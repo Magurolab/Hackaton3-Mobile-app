@@ -25,9 +25,12 @@
     </platform>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-chrome-apps-sockets-tcp" spec="^1.3.7" />
+<<<<<<< HEAD
     <plugin name="cordova-plugin-contacts" spec="^3.0.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+=======
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
     <engine name="android" spec="^7.1.0" />
 </widget>

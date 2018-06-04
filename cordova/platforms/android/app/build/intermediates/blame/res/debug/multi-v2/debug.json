@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
             "map": [
                 {
                     "source": "/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/src/main/res/values/strings.xml",
+=======
+            "outputFile": "/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/src/main/res/values/strings.xml",
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
                     "from": {
                         "startLines": "4,2,3",
                         "startColumns": "4,4,4",

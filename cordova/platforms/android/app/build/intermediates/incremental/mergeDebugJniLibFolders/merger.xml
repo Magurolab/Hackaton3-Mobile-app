@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/src/debug/jniLibs"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/src/debug/jniLibs"/></dataSet></merger>
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #Fri Jun 01 17:37:42 ICT 2018
 base.0=/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+=======
+#Fri Jun 01 14:46:41 ICT 2018
+base.0=/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
 renamed.0=classes.dex
-file.0=/Users/wit/Documents/CS/Rapid/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
+file.0=/Users/Siripatsorn /Desktop/Hackaton3-Mobile-app/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
