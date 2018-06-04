@@ -20,13 +20,24 @@ import Routes from './routes.js'
 // Import App Component
 import App from './app';
 
+<<<<<<< HEAD
 // import
 import VueCordova from 'vue-cordova'
 Vue.use(VueCordova)
+=======
+import VueCordova from 'vue-cordova'
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue, Framework7)
 
+<<<<<<< HEAD
+=======
+Vue.use(VueCordova, {
+  optionTestKey: 'optionTestValue'
+})
+
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {
   var cordovaScript = document.createElement('script')
@@ -35,7 +46,11 @@ if (window.location.protocol === 'file:' || window.location.port === '3000') {
   document.body.appendChild(cordovaScript)
 }
 
+<<<<<<< HEAD
 
+=======
+console.log('main.js cordova', Vue.cordova);
+>>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
 
 // Init App
 new Vue({
@@ -52,5 +67,10 @@ new Vue({
   // Register App Component
   components: {
     app: App
-  }
+  },
+  data: function () {
+    return {
+      cordova: Vue.cordova
+    }
+  },
 });
