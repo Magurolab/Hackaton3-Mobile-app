@@ -44,6 +44,9 @@
   import { auth, db } from '../../firebase'
   import F7ListItem from "framework7-vue/src/components/list-item";
   import F7BlockFooter from "framework7-vue/src/components/block-footer";
+  import * as f7router from "framework7";
+
+
   export default {
 
     data () {
@@ -92,11 +95,8 @@
             alert(authError);
           })
         app.dialog.alert(`username: ${this.username} success!`)
+        this.$f7router.navigate('/')
       }
     },
-    // created: function() {
-    //   console.log('username', username)
-    // },
-
   }
 </script>

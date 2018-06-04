@@ -60,7 +60,7 @@ export default [
     component: WishListPage,
   },
   {
-    path: '/home/',
+    path: '/buy/',
     component: BuyPage,
   },
   {

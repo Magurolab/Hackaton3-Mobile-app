@@ -7,7 +7,8 @@
     <f7-statusbar></f7-statusbar>
 
      <!--Main View -->
-    <f7-view id="main-view" url="/" main></f7-view>
+    <f7-view v-if="isAuthen" id="main-view" url="/" main></f7-view>
+    <f7-view v-else id="auth-view" url="/signin/" main></f7-view>
 
 
   </div>
@@ -33,7 +34,7 @@
     },
     methods: {
       isAuthen () {
-        return auth.currentUser!==null
+        return auth().currentUser!==null
       }
     },
   }
