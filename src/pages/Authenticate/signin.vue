@@ -50,6 +50,7 @@
           .catch(authError => {
             alert(authError);
           })
+        this.$f7router.navigate('/')
       }
     },
   }

@@ -30,7 +30,9 @@
         title="Create an Account"
         login-scrren-close
       ></f7-list-button>
-      <f7-link href="/signin/">Already have an account?</f7-link>
+      <f7-block-footer>
+        <f7-link href="/signin/">Already have an account?</f7-link>
+      </f7-block-footer>
     </f7-list>
   </f7-page>
 </template>
@@ -40,6 +42,11 @@
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
   import { auth, db } from '../../firebase'
+  import F7ListItem from "framework7-vue/src/components/list-item";
+  import F7BlockFooter from "framework7-vue/src/components/block-footer";
+  import * as f7router from "framework7";
+
+
   export default {
 
     data () {
@@ -57,6 +64,8 @@
       }
     },
     components: {
+      F7BlockFooter,
+      F7ListItem,
       F7Page,
       F7View,
     },
@@ -86,11 +95,8 @@
             alert(authError);
           })
         app.dialog.alert(`username: ${this.username} success!`)
+        this.$f7router.navigate('/')
       }
     },
-    // created: function() {
-    //   console.log('username', username)
-    // },
-
   }
 </script>

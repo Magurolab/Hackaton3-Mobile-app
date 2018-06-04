@@ -5,6 +5,7 @@
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar>
       <f7-link tab-link="#home" active><f7-icon f7="home_fill"></f7-icon></f7-link>
+      <f7-link tab-link="#buy"><f7-icon f7="home_fill"></f7-icon></f7-link>
       <f7-link tab-link="#wishlist"><f7-icon f7="heart_fill"></f7-icon></f7-link>
       <f7-link tab-link="#additem"><f7-icon f7="add_around"></f7-icon></f7-link>
       <f7-link tab-link="#inbox"><f7-icon f7="drawer"></f7-icon></f7-link>
@@ -14,6 +15,9 @@
     <f7-tabs>
       <f7-tab id="home" tab-active>
         <home-page />
+      </f7-tab>
+      <f7-tab id="buy">
+        <buy-page />
       </f7-tab>
       <f7-tab id="wishlist">
         <wishlist-page />
@@ -35,6 +39,7 @@
 
 <script>
   import Home from './home';
+  import Buy from './Items/buy'
   import Wishlist from './Items/WishList'
   import Additem from './Items/AddItem'
   import Inbox from './Messages/Inbox'
@@ -43,12 +48,11 @@
     name: 'Tabs',
     components: {
       'home-page': Home,
+      'buy-page': Buy,
       'wishlist-page': Wishlist,
       'additem-page': Additem,
       'inbox-page': Inbox,
       'profile-page': Profile,
     },
-    computed: {
-    }
   };
 </script>

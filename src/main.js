@@ -28,6 +28,8 @@ Vue.use(VueCordova)
 import VueCordova from 'vue-cordova'
 >>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
 
+import {auth} from "./firebase";
+
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue, Framework7)
 
@@ -68,9 +70,24 @@ new Vue({
   components: {
     app: App
   },
+<<<<<<< HEAD
   data: function () {
     return {
       cordova: Vue.cordova
     }
   },
+=======
+  methods: {
+    onF7Ready(f7) {
+      auth.onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          f7.router.navigate('/')
+        }
+        else {
+          f7.router.navigate('/signin/')
+        }
+      })
+    }
+  }
+>>>>>>> 8b5fd5965c4481f21cc28c2548d32ab2759cf54a
 });

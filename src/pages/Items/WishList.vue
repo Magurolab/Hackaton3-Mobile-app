@@ -19,7 +19,11 @@
 </template>
 
 <script>
+  import { auth, db } from '../../firebase'
   export default {
+    created: function () {
+      console.log('current user on wishlist', auth.currentUser)
+    },
   }
 </script>
 
