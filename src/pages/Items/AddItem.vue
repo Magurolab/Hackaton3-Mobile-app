@@ -9,13 +9,6 @@
         <f7-input @input="name = $event.target.value" type="text" placeholder="Name"></f7-input>
       </f7-list-item>
 
-      <!--<f7-list-item>-->
-        <!--<div>-->
-          <!--<p>My File Selector: <file-select :value="file" @input="file = $event.target.value" ></file-select></p>-->
-          <!--<p v-if="file">{{file.name}}</p>-->
-        <!--</div>-->
-      <!--</f7-list-item>-->
-
       <f7-list-item>
         <div>
           <f7-label>Photo</f7-label>
@@ -44,21 +37,22 @@
         <f7-input @input="description = $event.target.value" type="textarea" placeholder="Describe it"></f7-input>
       </f7-list-item>
 
-      <f7-list-button
-        @click="addItem"
-        title="SELL IT!!"
-      ></f7-list-button>
-
+      <f7-list>
+        <f7-block-footer>
+          <f7-button
+            @click="myURI"
+          > URI </f7-button>
+          <f7-button
+            @click="addItem"
+            class="col"
+            fill >SELL IT!</f7-button>
+        </f7-block-footer>
+      </f7-list>
     </f7-list>
-
-    <!--<f7-block >-->
-      <!--<f7-row tag="p">-->
-        <!--<f7-button-->
-          <!--@click="addItem"-->
-          <!--class="col"-->
-          <!--fill >SELL IT!</f7-button>-->
-      <!--</f7-row>-->
-    <!--</f7-block>-->
+    <div v-for="(pluginTest, plugin) in plugins" :class="{ ok: pluginEnabled(plugin) }" @click="pluginTest">
+      <span></span>{{ plugin }}
+    </div>
+    <div v-if="cordova">{{ cordova }}</div>
 
   </f7-page>
 </template>
@@ -69,9 +63,11 @@ import F7ListItem from "framework7-vue/src/components/list-item";
 import FileSelect from './../../components/Items/FileSelect'
 import F7Button from "framework7-vue/src/components/button";
 import F7Label from "framework7-vue/src/components/label";
-
+import F7BlockFooter from "framework7-vue/src/components/block-footer";
+import Vue from 'vue'
 export default {
   components: {
+    F7BlockFooter,
     F7Label,
     F7Button,
     F7ListItem,
@@ -85,34 +81,39 @@ export default {
       price: '',
       description: '',
       category: '',
-      file: null
+      file: null,
+      uri: '',
+      cordova: Vue.cordova,
+      plugins: {
+        'cordova-plugin-camera': function () {
+          if (!Vue.cordova.camera) {
+            window.alert('Vue.cordova.camera not found !')
+            return
+          }
+          Vue.cordova.camera.getPicture((imageURI) => {
+            this.uri = imageURI
+            this.file = cfUploadFile(imageURI, "image/jpeg")
+            window.alert('Photo URI : ' + imageURI)
+          }, (message) => {
+            window.alert('FAILED : ' + message)
+          }, {
+            quality: 50,
+            destinationType: Vue.cordova.camera.DestinationType.FILE_URI
+          })
+        },
+      },
     }
   },
 
   methods: {
-    takePhoto () {
-      let opts = {
-        quality: 80,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        mediaType: Camera.MediaType.PICTURE,
-        encodingType: Camera.EncodingType.JPEG,
-        cameraDirection: Camera.Direction.BACK,
-        targetWidth: 300,
-        targetHeight: 400
-      };
-      navigator.camera.getPicture(app.ftw, app.wtf, opts);
+    pluginEnabled: function (pluginName) {
+      return this.cordova.plugins.indexOf(pluginName) !== -1
     },
-    ftw () {
-      document.getElementById('msg').textContent = imgURI;
-      document.getElementById('photo').src = imgURI;
-    },
-    wtf () {
-      document.getElementById('msg').textContent = msg;
+    myURI () {
+      window.alert("plugins: " + this.uri)
     },
     addItem () {
       console.log(this.description)
-
       // var fileName = payload.file.name
       // var storageRef = firebase.storage().ref('images/' + fileName)
       // var uploadTask = storageRef.put(payload.file)

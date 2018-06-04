@@ -11,6 +11,7 @@
         <p>University</p>
         <p>Description</p>
       </div>
+      <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >Log out</f7-button>
     </div>
 
@@ -20,7 +21,6 @@
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
   import { auth, db } from '../../firebase'
-
   export default {
     data() {
       return {
@@ -39,6 +39,9 @@
           console.log("current user" + auth.currentUser)
         })
         this.$f7router.navigate('/signin/')
+      },
+      Whoami() {
+        console.log("current user ",auth.currentUser.email)
       }
     },
     created: function () {

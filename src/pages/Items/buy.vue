@@ -8,9 +8,6 @@
 <script>
   import { auth, db } from '../../firebase'
   export default {
-    data(){
-      curretUser: auth.currentUser
-    },
     created: function () {
       console.log('current user on buy page', auth.currentUser)
     },
