@@ -22,12 +22,12 @@ import App from './app';
 
 // import
 import VueCordova from 'vue-cordova'
+Vue.use(VueCordova)
+
+import {auth} from "./firebase";
+
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue, Framework7)
-Vue.use(VueCordova, {
-  optionTestKey: 'optionTestValue'
-})
-
 
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {
@@ -36,6 +36,8 @@ if (window.location.protocol === 'file:' || window.location.port === '3000') {
   cordovaScript.setAttribute('src', 'cordova.js')
   document.body.appendChild(cordovaScript)
 }
+
+
 
 // Init App
 new Vue({
@@ -53,9 +55,16 @@ new Vue({
   components: {
     app: App
   },
-  data: function () {
-    return {
-      cordova: Vue.cordova
+  methods: {
+    onF7Ready(f7) {
+      auth.onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          f7.router.navigate('/')
+        }
+        else {
+          f7.router.navigate('/signin/')
+        }
+      })
     }
-  },
+  }
 });
