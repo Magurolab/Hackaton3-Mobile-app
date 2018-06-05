@@ -9,7 +9,7 @@
         <div class="demo-facebook-date">University: {{userInfo.university}}</div>
         <div class="demo-facebook-date">Description: {{userInfo.description}}</div>
       </div>
-      <!--<f7-button @click="Whoami" >Who am I</f7-button>-->
+      <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >Log out</f7-button>
     </div>
 
@@ -52,9 +52,9 @@
         })
         this.$f7router.navigate('/signin/')
       },
-      // Whoami() {
-      //   console.log("current user ",auth.currentUser.email)
-      // }
+      Whoami() {
+        console.log("current user ",auth.currentUser.email)
+      }
     },
     created: function () {
       console.log('current user on profile', auth.currentUser)

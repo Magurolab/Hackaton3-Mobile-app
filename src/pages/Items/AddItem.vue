@@ -193,7 +193,7 @@ export default {
       updates['/Posts/' + postKey] = postData
       db.ref().update(updates)
       console.log("added " + this.name + "to the db")
-      this.$f7router.navigate('/')
+      this.$f7router.navigate("/buy/")
     },
   },
   created: function () {
