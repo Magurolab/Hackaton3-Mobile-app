@@ -20,12 +20,8 @@
       <f7-list-item link="/home/" title="Home"></f7-list-item>
       <f7-list-item link="/signin/" title="Sign In"></f7-list-item>
       <f7-list-item link="/signup/" title="Sign Up"></f7-list-item>
-<<<<<<< HEAD
       <f7-list-item link="/photo/" title="Upload photo"></f7-list-item>
-=======
-      <f7-list-item link="/photo/" title="Upload Photo"></f7-list-item>
 
->>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
     </f7-list>
 
 

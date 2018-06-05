@@ -190,13 +190,10 @@ export default {
         user: userInfo.username,
         url: 'https://firebasestorage.googleapis.com/v0/b/hackaton3-e8c2f.appspot.com/o/29342404_1651558714912885_8821876827908993035_n.jpg?alt=media&token=fd2ea1fb-f3e6-441a-a936-20144f80f2d6'
       }
-      // uploadTask.snapshot.ref.getDownloadURL().then(url => {
-      //   db.ref('Posts/' + postKey + '/url').set(url)
-      // })
       updates['/Posts/' + postKey] = postData
       db.ref().update(updates)
       console.log("added " + this.name + "to the db")
-      this.$f7router.navigate('/')
+      this.$f7router.navigate("/buy/")
     },
   },
   created: function () {
