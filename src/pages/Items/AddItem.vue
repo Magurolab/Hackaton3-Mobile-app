@@ -3,6 +3,14 @@
     <f7-navbar title="Add Item" back-link="Back"></f7-navbar>
 
     <f7-list form>
+      <f7-list-item>
+          <!--{{this.currentuser.email}}-->
+        <!--<br/>-->
+          <!--{{this.currentuser.uid}}-->
+          <br/>
+          <!--{{this.currentuser.university}}-->
+
+      </f7-list-item>
 
       <f7-list-item>
         <f7-label>Item Name</f7-label>
@@ -43,7 +51,7 @@
             @click="myURI"
           > URI </f7-button>
           <f7-button
-            @click="addItem"
+            @click="addProduct"
             class="col"
             fill >SELL IT!</f7-button>
         </f7-block-footer>
@@ -65,6 +73,8 @@ import F7Button from "framework7-vue/src/components/button";
 import F7Label from "framework7-vue/src/components/label";
 import F7BlockFooter from "framework7-vue/src/components/block-footer";
 import Vue from 'vue'
+import {auth,db} from "../../firebase";
+
 export default {
   components: {
     F7BlockFooter,
@@ -77,6 +87,7 @@ export default {
   },
   data() {
     return {
+      currentuser: auth.currentUser,
       name: '',
       price: '',
       description: '',
@@ -112,45 +123,70 @@ export default {
     myURI () {
       window.alert("plugins: " + this.uri)
     },
-    addItem () {
-      console.log(this.description)
-      // var fileName = payload.file.name
-      // var storageRef = firebase.storage().ref('images/' + fileName)
-      // var uploadTask = storageRef.put(payload.file)
-      // uploadTask.on('state_changed', function (snapshot) {
-      //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      //   console.log('Upload is ' + progress + '% done')
-      //   switch (snapshot.state) {
-      //     case firebase.storage.TaskState.PAUSED: // or 'paused'
-      //       console.log('Upload is paused')
-      //       break
-      //     case firebase.storage.TaskState.RUNNING: // or 'running'
-      //       console.log('Upload is running')
-      //       break
-      //     case firebase.storage.TaskState.SUCCESS:
-      //       console.log('Upload success')
-      //   }
-      // }, function (error) {
-      //   console.log(error)
-      // }, function () {
-      //   const uid = auth.currentUser.uid
-      //   var postKey = db.ref('Posts/').push().key
-      //   var updates = {}
-      //   var postData = {
-      //     name: payload.name,
-      //     description: payload.description,
-      //     price: payload.price,
-      //     category: payload.category,
-      //     user: uid,
-      //     url: ''
-      //   }
-      //   uploadTask.snapshot.ref.getDownloadURL().then(url => {
-      //     db.ref('Posts/' + postKey + '/url').set(url)
-      //   })
-      //   updates['/Posts/' + postKey] = postData
-      //   db.ref().update(updates)
-      // })
+    // addItem () {
+    //   // console.log(this.description)
+    //   var fileName = payload.file.name
+    //   var storageRef = firebase.storage().ref('images/' + fileName)
+    //   var uploadTask = storageRef.put(payload.file)
+    //   uploadTask.on('state_changed', function (snapshot) {
+    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     console.log('Upload is ' + progress + '% done')
+    //     switch (snapshot.state) {
+    //       case firebase.storage.TaskState.PAUSED: // or 'paused'
+    //         console.log('Upload is paused')
+    //         break
+    //       case firebase.storage.TaskState.RUNNING: // or 'running'
+    //         console.log('Upload is running')
+    //         break
+    //       case firebase.storage.TaskState.SUCCESS:
+    //         console.log('Upload success')
+    //     }
+    //   }, function (error) {
+    //     console.log(error)
+    //   }, function () {
+    //     const uid = auth.currentUser.uid
+    //     var postKey = db.ref('Posts/').push().key
+    //     var updates = {}
+    //     var postData = {
+    //       name: payload.name,
+    //       description: payload.description,
+    //       price: payload.price,
+    //       category: payload.category,
+    //       user: uid,
+    //       url: ''
+    //     }
+    //     uploadTask.snapshot.ref.getDownloadURL().then(url => {
+    //       db.ref('Posts/' + postKey + '/url').set(url)
+    //     })
+    //     updates['/Posts/' + postKey] = postData
+    //     db.ref().update(updates)
+    //   })
+    // },
+    addProduct() {
+      console.log("onclick "+ auth.currentUser.uid)
+      // const uid = auth.currentUser.uid
+      // var postKey = db.ref('Posts/').push().key
+      // var updates = {}
+      // var postData = {
+      //   name: this.name,
+      //   description: this.description,
+      //   price: this.price,
+      //   category: this.category,
+      //   userid: uid,
+      //   user: uid.username,
+      //   // url: ''
+      // }
+      // // uploadTask.snapshot.ref.getDownloadURL().then(url => {
+      // //   db.ref('Posts/' + postKey + '/url').set(url)
+      // // })
+      // updates['/Posts/' + postKey] = postData
+      // db.ref().update(updates)
+      // console.log("added " + this.name + "to the db")
+      // this.$f7router.navigate('/buy/')
     },
-  }
+  },
+  created: function () {
+    console.log('current user on profile', auth.currentUser.email)
+  },
 }
 </script>
