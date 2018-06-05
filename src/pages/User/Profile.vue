@@ -4,10 +4,10 @@
 
     <div class="card demo-facebook-card">
       <div class="card-header">
-        <div class="demo-facebook-name">{{userInfo.username}}</div>
-        <div class="demo-facebook-date">Email: {{userInfo.email}}</div>
-        <div class="demo-facebook-date">University: {{userInfo.university}}</div>
-        <div class="demo-facebook-date">Description: {{userInfo.description}}</div>
+        <div class="demo-facebook-name">{{user[3]['.value']}}</div>
+        <div class="demo-facebook-date">Email: {{user[1]['.value']}}</div>
+        <div class="demo-facebook-date">University: {{user[2]['.value']}}</div>
+        <div class="demo-facebook-date">Description: {{user[0]['.value']}}</div>
       </div>
       <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >Log out</f7-button>
@@ -22,8 +22,19 @@
   export default {
     data() {
       return {
-        email: '',
-        password: ''
+        user: {},
+        users:{},
+        cards:{},
+      }
+    },
+    firebase: function () {
+      return {
+        user:{
+          source: db.ref('/Users/' + auth.currentUser.uid)
+        },
+        users:{
+          source: db.ref('/Users/')
+        },
       }
     },
     components: {
@@ -43,9 +54,6 @@
       },
     },
     methods: {
-      userEmail(){
-        return auth.currentUser.email
-      },
       signOut() {
         auth.signOut().then(()=>{
           console.log("current user" + auth.currentUser)
@@ -53,11 +61,12 @@
         this.$f7router.navigate('/signin/')
       },
       Whoami() {
-        console.log("current user ",auth.currentUser.email)
+        console.log("current user ", auth.currentUser.uid)
+        console.log("user ", this.user)
       }
     },
     created: function () {
-      console.log('current user on profile', auth.currentUser)
+      console.log('current user on profile', auth.currentUser.uid)
     },
 
   }
