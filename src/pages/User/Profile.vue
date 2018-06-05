@@ -4,15 +4,14 @@
 
     <div class="card demo-facebook-card">
       <div class="card-header">
-        <div class="demo-facebook-name">{{user[3]['.value']}}</div>
-        <div class="demo-facebook-date">Email: {{user[1]['.value']}}</div>
-        <div class="demo-facebook-date">University: {{user[2]['.value']}}</div>
-        <div class="demo-facebook-date">Description: {{user[0]['.value']}}</div>
+        <div class="demo-facebook-name">{{user.username}}</div>
+        <div class="demo-facebook-date">Email: {{user.email}}</div>
+        <div class="demo-facebook-date">University: {{user.university}}</div>
+        <div class="demo-facebook-date">Description: {{user.description}}</div>
       </div>
       <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >Log out</f7-button>
     </div>
-
   </f7-page>
 </template>
 <script>
@@ -24,13 +23,13 @@
       return {
         user: {},
         users:{},
-        cards:{},
       }
     },
     firebase: function () {
       return {
         user:{
-          source: db.ref('/Users/' + auth.currentUser.uid)
+          source: db.ref('Users/' + auth.currentUser.uid),
+          asObject: true,
         },
         users:{
           source: db.ref('/Users/')
@@ -42,16 +41,24 @@
       F7View,
       auth, db
     },
-    computed: {
-      userInfo() {
-        var currentuserInfo = null;
-        const uid = auth.currentUser.uid
-        const ref = db.ref('Users/' + uid)
-        ref.on('value', function (snapshot) {
-          currentuserInfo = snapshot.val()
-        })
-        return currentuserInfo
+    // computed: {
+    //   userInfo() {
+    //     var currentuserInfo = null;
+    //     const uid = auth.currentUser.uid
+    //     const ref = db.ref('Users/' + uid)
+    //     ref.once('value', function (snapshot) {
+    //       currentuserInfo = snapshot.val()
+    //     })
+    //     return currentuserInfo
+    //   },
+    // },
+    watch: {
+      user: ()=>{
+        console.log("yooo")
       },
+      users: ()=>{
+        console.log("new user")
+      }
     },
     methods: {
       signOut() {
@@ -62,7 +69,7 @@
       },
       Whoami() {
         console.log("current user ", auth.currentUser.uid)
-        console.log("user ", this.user)
+        console.log("users ", this.user)
       }
     },
     created: function () {
