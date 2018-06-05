@@ -69,7 +69,6 @@
             })
           }
         })
-
         return tmp
         //   .filter(function (u) {
         //   return u.user !== auth.currentUser.uid
