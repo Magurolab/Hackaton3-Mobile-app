@@ -11,13 +11,28 @@ export const createChatRoom = (uid_1, uid_2) => {
           userid2: uid_2
         }
       ).key
-  // db.ref('Users/'+uid_1)
-  //   .child('currentChat')
-  //   .update({id: ChatRoomId})
-  //
-  // db.ref('Users/'+uid_2)
-  //   .child('currentChat')
-  //   .update({id: ChatRoomId})
+      db.ref('Users/'+uid_1)
+        .child('currentChats')
+        .transaction(
+          data => {
+            if(data === null){
+              return [ChatRoomId]
+            }else{
+              return [...data, ChatRoomId]
+            }
+          }
+        )
+      db.ref('Users/'+uid_2)
+        .child('currentChats')
+        .transaction(
+          data => {
+            if(data === null){
+              return [ChatRoomId]
+            }else{
+              return [...data, ChatRoomId]
+            }
+          }
+        )
 }
 
 export const createMessage = (senderId, roomId,newMessageText) =>{
@@ -35,4 +50,12 @@ export const createMessage = (senderId, roomId,newMessageText) =>{
     }
   })
   console.log("done creteMessage")
+}
+
+export const getCurrentChats = (uid, chatId_lst) =>{
+  var i;
+  for (i = 0; i < chatId_lst.length; i++) {
+    console.log("getCurrentChat at" + chatId_lst[i].text)
+  }
+
 }

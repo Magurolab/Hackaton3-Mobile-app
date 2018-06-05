@@ -18,7 +18,7 @@
       <f7-card v-for="card in cards">
         <f7-card-header>
           {{card.user}}
-          <f7-button @click="redirect(card.uid)" ><f7-icon material="send"></f7-icon></f7-button>
+          <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
           <f7-button><f7-icon f7="heart_fill" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
@@ -69,11 +69,10 @@
       redirect (user2_id) {
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid
-        console.log('usr2Id = '+ user2_id)
-        // createChatRoom(user1_id, user2_id).then(()=>{
-        //     this.$f7router.navigate("/chatbox/")
-        //   }
-        // )
+        // console.log('usr2Id = '+ user2_id)
+        createChatRoom(user1_id, user2_id)
+        this.$f7router.navigate("/chatbox/")
+
 
       },
       // onLoadItem (id) {
