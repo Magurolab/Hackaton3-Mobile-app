@@ -19,7 +19,7 @@
         <f7-card-header>
           {{card.user}}
           <f7-button @click="redirect" ><f7-icon material="send"></f7-icon></f7-button>
-          <f7-button><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <f7-button @click="addWishlist(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
@@ -67,6 +67,11 @@
       redirect () {
         console.log("fff")
         this.$f7router.navigate("/chatbox/")
+      },
+      addWishlist (id) {
+        //console.log(id)
+        const uid = auth.currentUser.uid
+        db.ref('Users/' + uid + '/wishlist').push(id)
       },
       // onLoadItem (id) {
       //   this.$router.push('/items/' + id)
