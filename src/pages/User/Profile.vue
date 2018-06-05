@@ -4,8 +4,10 @@
 
     <div class="card demo-facebook-card">
       <div class="card-header">
-        <div class="demo-facebook-name">Username</div>
-        <div class="demo-facebook-date">Email</div>
+        <div class="demo-facebook-name">{{userInfo().username}}</div>
+        <div class="demo-facebook-date">Email: {{userEmail()}}</div>
+        <div class="demo-facebook-date">University: {{userInfo().university}}</div>
+        <div class="demo-facebook-date">Description: {{userInfo().description}}</div>
       </div>
       <div class="card-content card-content-padding">
         <p>University</p>
@@ -34,6 +36,18 @@
       auth, db
     },
     methods: {
+      userInfo(){
+        var userInfo = null;
+        const uid = auth.currentUser.uid
+        const ref = db.ref('Users/' + uid)
+        ref.on('value', function (snapshot) {
+          userInfo = snapshot.val()
+        })
+        return userInfo
+      },
+      userEmail(){
+        return auth.currentUser.email
+      },
       signOut() {
         auth.signOut().then(()=>{
           console.log("current user" + auth.currentUser)

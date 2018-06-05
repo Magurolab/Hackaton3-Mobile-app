@@ -162,27 +162,41 @@ export default {
     //     db.ref().update(updates)
     //   })
     // },
+    userInfo(){
+      var userInfo = null;
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Users/' + uid)
+      ref.on('value', function (snapshot) {
+        userInfo = snapshot.val()
+      })
+      return userInfo
+    },
     addProduct() {
-      console.log("onclick "+ auth.currentUser.uid)
-      // const uid = auth.currentUser.uid
-      // var postKey = db.ref('Posts/').push().key
-      // var updates = {}
-      // var postData = {
-      //   name: this.name,
-      //   description: this.description,
-      //   price: this.price,
-      //   category: this.category,
-      //   userid: uid,
-      //   user: uid.username,
-      //   // url: ''
-      // }
-      // // uploadTask.snapshot.ref.getDownloadURL().then(url => {
-      // //   db.ref('Posts/' + postKey + '/url').set(url)
-      // // })
-      // updates['/Posts/' + postKey] = postData
-      // db.ref().update(updates)
-      // console.log("added " + this.name + "to the db")
-      // this.$f7router.navigate('/buy/')
+      var userInfo = null;
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Users/' + uid)
+      ref.on('value', function (snapshot) {
+        userInfo = snapshot.val()
+      })
+      console.log(userInfo.username)
+      var postKey = db.ref('Posts/').push().key
+      var updates = {}
+      var postData = {
+        name: this.name,
+        description: this.description,
+        price: this.price,
+        category: this.category,
+        userid: uid,
+        user: userInfo.username,
+        url: 'https://firebasestorage.googleapis.com/v0/b/hackaton3-e8c2f.appspot.com/o/29342404_1651558714912885_8821876827908993035_n.jpg?alt=media&token=fd2ea1fb-f3e6-441a-a936-20144f80f2d6'
+      }
+      // uploadTask.snapshot.ref.getDownloadURL().then(url => {
+      //   db.ref('Posts/' + postKey + '/url').set(url)
+      // })
+      updates['/Posts/' + postKey] = postData
+      db.ref().update(updates)
+      console.log("added " + this.name + "to the db")
+      this.$f7router.navigate('/')
     },
   },
   created: function () {
