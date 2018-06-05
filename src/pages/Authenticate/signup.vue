@@ -1,6 +1,10 @@
 <template>
   <f7-page login-screen>
-    <f7-login-screen-title>Sign Up</f7-login-screen-title>
+    <header>
+      <div class="heading">
+        <f7-login-screen-title class="city">Sign Up</f7-login-screen-title>
+      </div>
+    </header>
     <f7-list form>
       <f7-list-item>
         <f7-label>Username</f7-label>
@@ -100,3 +104,42 @@
     },
   }
 </script>
+
+<style scoped>
+  header {
+    background: url(../../../static/ben-white.jpg) no-repeat;
+    background-size: cover;
+    min-height:14em;
+    position: relative;
+    z-index: -2;
+  }
+  .heading{
+    padding: 0 1em 1em 1em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    box-sizing: border-box;
+  }
+
+  .heading::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(255,255,255, 0), rgba(8,61, 80, 0.9));
+    z-index: -1;
+  //  opacity:0.8;
+  }
+  .city{
+    font-size: 2.8em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #fff;
+  }
+</style>
+
+
