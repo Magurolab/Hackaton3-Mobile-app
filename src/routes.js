@@ -20,11 +20,8 @@ import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
 
 import ProfilePage from './pages/User/Profile';
-<<<<<<< HEAD
 import Upload from './pages/TestUpload'
-=======
-import UploadPhoto from './pages/TestUploadPhoto'
->>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
+
 
 export default [
   {
@@ -81,11 +78,7 @@ export default [
   },
   {
     path: '/photo/',
-<<<<<<< HEAD
     component: Upload,
-=======
-    component: UploadPhoto,
->>>>>>> 706c97c8181664dfe3289a7c9af8a0859addd026
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
