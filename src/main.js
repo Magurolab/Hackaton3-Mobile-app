@@ -37,8 +37,6 @@ if (window.location.protocol === 'file:' || window.location.port === '3000') {
   document.body.appendChild(cordovaScript)
 }
 
-
-
 // Init App
 new Vue({
   el: '#app',

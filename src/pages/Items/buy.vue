@@ -1,26 +1,56 @@
 <template>
   <f7-page>
-    <div class="card demo-facebook-card" v-for="card in cards">
-      <div class="card-header">
-        <div class="demo-facebook-name"> {{card.name}} </div>
-        <div class="demo-facebook-date">{{card.user}}</div>
-      </div>
-      <div class="card-content card-content-padding">
-        <p>{{card.name}}</p><img :src="card.url" width="100%"/>
-      </div>
-      <div class="card-footer">
-        <div class="demo-facebook-name"> {{card.price}} </div>
-        <div class="demo-facebook-date">{{card.description}}</div>
-      </div>
-    </div>
+    <!--<div class="card demo-facebook-card" v-for="card in cards">-->
+      <!--<div class="card-header">-->
+        <!--<div class="demo-facebook-name"> {{card.name}} </div>-->
+        <!--<div class="demo-facebook-date">{{card.user}}</div>-->
+      <!--</div>-->
+      <!--<div class="card-content card-content-padding">-->
+        <!--<p>{{card.name}}</p><img :src="card.url" width="100%"/>-->
+      <!--</div>-->
+      <!--<div class="card-footer">-->
+        <!--<div class="demo-facebook-name"> {{card.price}} </div>-->
+        <!--<div class="demo-facebook-date">{{card.description}}</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <f7-list>
+      <f7-card v-for="card in cards">
+        <f7-card-header>
+          {{card.user}}
+          <f7-button @click="redirect(card.uid)" ><f7-icon material="send"></f7-icon></f7-button>
+          <f7-button><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+        </f7-card-header>
+        <f7-card-content>
+          <img :src="card.url" width="100%"/>
+        </f7-card-content>
+        <f7-card-footer>
+          {{"Item: " + card.name}}
+          <br/>
+          {{"$"+card.price}}
+          <br/>
+          {{"Description: " + card.description}}
+        </f7-card-footer>
+      </f7-card>
+    </f7-list>
 
   </f7-page>
 </template>
 
 <script>
   import { auth, db } from '../../firebase'
+  import F7CardContent from "framework7-vue/src/components/card-content";
+  import F7CardHeader from "framework7-vue/src/components/card-header";
+  import F7Icon from "framework7-vue/src/components/icon";
+  import F7Button from "framework7-vue/src/components/button";
+  import { createChatRoom } from "../Messages/MessageSyetem/MessageUtils";
+
   export default {
     components: {
+      F7Button,
+      F7Icon,
+      F7CardHeader,
+      F7CardContent,
       auth, db
     },
     computed: {
@@ -41,7 +71,6 @@
             })
           }
         })
-
         return tmp
         //   .filter(function (u) {
         //   return u.user !== auth.currentUser.uid
@@ -49,6 +78,16 @@
       }
     },
     methods: {
+      redirect (user2_id) {
+        console.log("redicrct to chatroom")
+        const user1_id = auth.currentUser.uid
+        console.log('usr2Id = '+ user2_id)
+        // createChatRoom(user1_id, user2_id).then(()=>{
+        //     this.$f7router.navigate("/chatbox/")
+        //   }
+        // )
+
+      },
       // onLoadItem (id) {
       //   this.$router.push('/items/' + id)
       // },

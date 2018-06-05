@@ -7,16 +7,17 @@ export const createChatRoom = (uid_1, uid_2) => {
 
   const ChatRoomId = db.ref('ChatRooms/').push(
         {
-          users: [uid_1,uid_2]
+          userid1: uid_1,
+          userid2: uid_2
         }
       ).key
-  db.ref('Users/'+uid_1)
-    .child('currentChat')
-    .update({id: ChatRoomId})
-
-  db.ref('Users/'+uid_2)
-    .child('currentChat')
-    .update({id: ChatRoomId})
+  // db.ref('Users/'+uid_1)
+  //   .child('currentChat')
+  //   .update({id: ChatRoomId})
+  //
+  // db.ref('Users/'+uid_2)
+  //   .child('currentChat')
+  //   .update({id: ChatRoomId})
 }
 
 export const createMessage = (senderId, roomId,newMessageText) =>{

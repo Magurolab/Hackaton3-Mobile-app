@@ -4,14 +4,10 @@
 
     <div class="card demo-facebook-card">
       <div class="card-header">
-        <div class="demo-facebook-name">{{userInfo().username}}</div>
-        <div class="demo-facebook-date">Email: {{userEmail()}}</div>
-        <div class="demo-facebook-date">University: {{userInfo().university}}</div>
-        <div class="demo-facebook-date">Description: {{userInfo().description}}</div>
-      </div>
-      <div class="card-content card-content-padding">
-        <p>University</p>
-        <p>Description</p>
+        <div class="demo-facebook-name">{{userInfo.username}}</div>
+        <div class="demo-facebook-date">Email: {{userInfo.email}}</div>
+        <div class="demo-facebook-date">University: {{userInfo.university}}</div>
+        <div class="demo-facebook-date">Description: {{userInfo.description}}</div>
       </div>
       <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >Log out</f7-button>
@@ -35,16 +31,18 @@
       F7View,
       auth, db
     },
-    methods: {
-      userInfo(){
-        var userInfo = null;
+    computed: {
+      userInfo() {
+        var currentuserInfo = null;
         const uid = auth.currentUser.uid
         const ref = db.ref('Users/' + uid)
         ref.on('value', function (snapshot) {
-          userInfo = snapshot.val()
+          currentuserInfo = snapshot.val()
         })
-        return userInfo
+        return currentuserInfo
       },
+    },
+    methods: {
       userEmail(){
         return auth.currentUser.email
       },
