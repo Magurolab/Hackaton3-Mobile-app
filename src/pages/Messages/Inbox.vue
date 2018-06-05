@@ -20,8 +20,8 @@
     components: {F7Button, F7List},
     data () {
       return {
-        chatId_lst:{},
-        AllChat:null
+        chatId_lst: {},
+        AllChat:null,
       }
     },
     firebase: function () {
@@ -37,8 +37,8 @@
     watch: {
       chatId_lst: function () {
         console.log("something get update chatId_lst change")
-        console.log(this.chatId_lst)
-        console.log(auth.currentUser.uid)
+        console.log(this.chatId_lst);
+        console.log(auth.currentUser.uid);
         const uid = auth.currentUser.uid;
         // chats = getCurrentChats(uid, this.chatId_lst)
       }

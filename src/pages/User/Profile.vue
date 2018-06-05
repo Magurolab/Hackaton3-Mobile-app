@@ -18,7 +18,8 @@
 <script>
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
-  import { auth, db } from '../../firebase'
+  import firebase, { auth, db } from '../../firebase'
+  // console.log("AAA", JSON.stringify(firebase.auth()));
   export default {
     data() {
       return {
@@ -26,21 +27,27 @@
         password: ''
       }
     },
+    firebase: () => ({
+      userInfo: {
+        source: db.ref(`Users/${auth.currentUser.uid}`)
+      }
+    }),
     components: {
       F7Page,
       F7View,
       auth, db
     },
     computed: {
-      userInfo() {
-        var currentuserInfo = null;
-        const uid = auth.currentUser.uid
-        const ref = db.ref('Users/' + uid)
-        ref.on('value', function (snapshot) {
-          currentuserInfo = snapshot.val()
-        })
-        return currentuserInfo
-      },
+      // userInfo() {
+      //   let currentuserInfo = null;
+      //   const uid = auth.currentUser.uid
+      //   const ref = db.ref('Users/' + uid)
+      //   ref.on('value', function (snapshot.val()) {
+      //     console.log("snapshot:", snapshot)
+      //     currentuserInfo = snapshot.val()
+      //   });
+      //   return currentuserInfo
+      // },
     },
     methods: {
       userEmail(){
@@ -53,7 +60,7 @@
         this.$f7router.navigate('/signin/')
       },
       Whoami() {
-        console.log("current user ",auth.currentUser.email)
+        console.log("current user ",auth)
       }
     },
     created: function () {

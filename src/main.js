@@ -40,33 +40,85 @@ if (window.location.protocol === 'file:' || window.location.port === '3000') {
   document.body.appendChild(cordovaScript)
 }
 
-// Init App
-new Vue({
-  el: '#app',
-  // render: h => h(App),
-  template: '<app/>',
-  // Init Framework7 by passing parameters here
-  framework7: {
-    id: 'io.framework7.testapp', // App bundle ID
-    name: 'Framework7', // App name
-    theme: 'auto', // Automatic theme detection
-    // App routes
-    routes: Routes,
-  },
-  // Register App Component
-  components: {
-    app: App
-  },
-  methods: {
-    onF7Ready(f7) {
-      auth.onAuthStateChanged((firebaseUser) => {
+const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
+  new Vue({
+    el: '#app',
+    // render: h => h(App),
+    template: '<app/>',
+    // Init Framework7 by passing parameters here
+    framework7: {
+      routes: Routes,
+      id: 'io.framework7.testapp', // App bundle ID
+      name: 'Framework7', // App name
+      theme: 'auto', // Automatic theme detection
+      // App routes
+    },
+    // Register App Component
+    components: {
+      app: App
+    },
+    beforeCreate() {
+      unsubscribe();
+    },
+    methods: {
+      onF7Ready(f7) {
         if (firebaseUser) {
           f7.router.navigate('/')
-        }
-        else {
+        } else {
           f7.router.navigate('/signin/')
         }
-      })
+
+
+      }
     }
-  }
+  })
 });
+
+// Init App
+// new Vue({
+//   el: '#app',
+//   // render: h => h(App),
+//   template: '<app/>',
+//   // Init Framework7 by passing parameters here
+//   framework7: {
+//     routes: Routes,
+//     id: 'io.framework7.testapp', // App bundle ID
+//     name: 'Framework7', // App name
+//     theme: 'auto', // Automatic theme detection
+//     // App routes
+//   },
+//
+//   data() {
+//     loaded: false
+//   },
+//   // Register App Component
+//   components: {
+//     app: App
+//   },
+//   methods: {
+//     onF7Ready(f7) {
+//       auth.onAuthStateChanged((firebaseUser) => {
+//
+//
+//         if (firebaseUser) {
+//           this.time(() => f7.router.navigate('/'))
+//         }
+//         else {
+//           f7.router.navigate('/signin/')
+//         }
+//       })
+//     },
+//     time(cb){
+//       console.log("time")
+//      const aaa =  new Promise((accept, reject) => {
+//        while (auth.currentUser == null){
+//          console.log("Waiting")
+//        }
+//
+//        accept();
+//       });
+//
+//      aaa.then (() => cb())
+//     }
+//   }
+// });
