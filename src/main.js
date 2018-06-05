@@ -20,13 +20,16 @@ import Routes from './routes.js'
 // Import App Component
 import App from './app';
 
+//import VueFire
+import VueFire from 'vuefire';
+
 // import
 import VueCordova from 'vue-cordova'
-Vue.use(VueCordova)
-
 import {auth} from "./firebase";
 
 // Init F7 Vue Plugin
+Vue.use(VueCordova)
+Vue.use(VueFire);
 Vue.use(Framework7Vue, Framework7)
 
 // add cordova.js only if serving the app through file://
@@ -40,6 +43,7 @@ if (window.location.protocol === 'file:' || window.location.port === '3000') {
 // Init App
 new Vue({
   el: '#app',
+  // render: h => h(App),
   template: '<app/>',
   // Init Framework7 by passing parameters here
   framework7: {

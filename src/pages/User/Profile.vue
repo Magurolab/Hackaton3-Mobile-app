@@ -59,6 +59,7 @@
     created: function () {
       console.log('current user on profile', auth.currentUser)
     },
+
   }
 
 </script>

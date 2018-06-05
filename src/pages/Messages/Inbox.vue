@@ -10,9 +10,28 @@
       <f7-list-item link="/chatbox/" title="user4"></f7-list-item>
     </f7-list>
 
+
+
   </f7-page>
 </template>
 
 <script>
-  export default {}
+  import F7List from "framework7-vue/src/components/list";
+  import {db} from "../../firebase";
+
+  export default {
+    components: {F7List},
+    data () {
+      return {
+        users:{}
+      }
+    },
+    firebase: function () {
+      return {
+        users:{
+          source: db.ref('/Users')
+        },
+      }
+    },
+  }
 </script>

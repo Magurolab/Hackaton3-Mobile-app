@@ -44,36 +44,24 @@
   import F7Icon from "framework7-vue/src/components/icon";
   import F7Button from "framework7-vue/src/components/button";
   export default {
+    data () {
+      return {
+        cards: {}
+      }
+    },
+    firebase: function () {
+      return {
+        cards:{
+          source: db.ref('/Posts')
+        },
+      }
+    },
     components: {
       F7Button,
       F7Icon,
       F7CardHeader,
       F7CardContent,
       auth, db
-    },
-    computed: {
-      cards () {
-        var tmp = []
-        db.ref('/Posts/').on('value', function (snapshot) {
-          console.log(snapshot.val())
-          for (let key in snapshot.val()) {
-            tmp.push({
-              id: key,
-              category: snapshot.val()[key].category,
-              description: snapshot.val()[key].description,
-              name: snapshot.val()[key].name,
-              price: snapshot.val()[key].price,
-              url: snapshot.val()[key].url,
-              user: snapshot.val()[key].user,
-              uid: snapshot.val()[key].uid
-            })
-          }
-        })
-        return tmp
-        //   .filter(function (u) {
-        //   return u.user !== auth.currentUser.uid
-        // })
-      }
     },
     methods: {
       redirect () {
