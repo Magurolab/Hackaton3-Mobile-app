@@ -1,25 +1,11 @@
 <template>
   <f7-page>
-    <!--<div class="card demo-facebook-card" v-for="card in cards">-->
-      <!--<div class="card-header">-->
-        <!--<div class="demo-facebook-name"> {{card.name}} </div>-->
-        <!--<div class="demo-facebook-date">{{card.user}}</div>-->
-      <!--</div>-->
-      <!--<div class="card-content card-content-padding">-->
-        <!--<p>{{card.name}}</p><img :src="card.url" width="100%"/>-->
-      <!--</div>-->
-      <!--<div class="card-footer">-->
-        <!--<div class="demo-facebook-name"> {{card.price}} </div>-->
-        <!--<div class="demo-facebook-date">{{card.description}}</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
     <f7-list>
       <f7-card v-for="card in cards">
         <f7-card-header>
           {{card.user}}
           <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
-          <f7-button><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <f7-button @click="addWishlist(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
@@ -69,23 +55,15 @@
       redirect (user2_id) {
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid
-        // console.log('usr2Id = '+ user2_id)
         createChatRoom(user1_id, user2_id)
         this.$f7router.navigate("/chatbox/")
-
-
       },
-      // onLoadItem (id) {
-      //   this.$router.push('/items/' + id)
-      // },
-      // addWishlist (id) {
-      //   const uid = auth.currentUser.uid
-      //   db.ref('Users/' + uid + '/wishlist').push(id)
-      // }
+      addWishlist (id) {
+        const uid = auth.currentUser.uid
+        console.log("add item to wishlist")
+        db.ref('Users/' + uid + '/wishlist').push(id)
+      }
     },
-    // beforeMount () {
-    //   this.$store.dispatch('loadCards')
-    // },
   }
 </script>
 

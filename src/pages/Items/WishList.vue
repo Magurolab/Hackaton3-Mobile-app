@@ -1,28 +1,107 @@
 <template>
   <f7-page>
-    <f7-navbar title="Wish list" back-link="Back"></f7-navbar>
-
-    <div class="card demo-facebook-card">
-      <div class="card-header">
-        <div class="demo-facebook-avatar"><img src="http://lorempixel.com/68/68/people/1/" width="34" height="34"/></div>
-        <div class="demo-facebook-name">John Doe</div>
-        <div class="demo-facebook-date">Monday at 2:15 PM</div>
-      </div>
-      <div class="card-content card-content-padding">
-        <p>What a nice photo i took yesterday!</p><img src="http://lorempixel.com/1000/700/nature/8/" width="100%"/>
-      </div>
-      <div class="card-footer">
-      </div>
-    </div>
+    <f7-button @click="Whoami" >Who am I</f7-button>
+    <f7-list>
+      <f7-card v-for="card in wishlistCards">
+        <f7-card-header>
+          {{card.user}}
+          <f7-button @click="redirect" ><f7-icon material="send"></f7-icon></f7-button>
+          <f7-button @click="removeItem(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+        </f7-card-header>
+        <f7-card-content>
+          <img :src="card.url" width="100%"/>
+        </f7-card-content>
+        <f7-card-footer>
+          {{"Item: " + card.name}}
+          <br/>
+          {{"$"+card.price}}
+          <br/>
+          {{"Description: " + card.description}}
+        </f7-card-footer>
+      </f7-card>
+    </f7-list>
 
   </f7-page>
 </template>
 
 <script>
   import { auth, db } from '../../firebase'
+  import F7CardContent from "framework7-vue/src/components/card-content";
+  import F7CardHeader from "framework7-vue/src/components/card-header";
+  import F7Icon from "framework7-vue/src/components/icon";
+  import F7Button from "framework7-vue/src/components/button";
+
   export default {
-    created: function () {
-      // console.log('current user on wishlist', auth.currentUser.email)
+    data () {
+      return {
+        cards: {},
+        wishlist: [],
+      }
+    },
+
+    firebase: function () {
+      return {
+        cards:{
+          source: db.ref('/Posts')
+        },
+      }
+    },
+    computed:{
+      wishlistCards () {
+        const wl = this.wishlist
+        const c = this.cards
+        return c.filter(function(u){
+          return wl.includes(u['.key'])
+        })
+      }
+    },
+    components: {
+      F7Button,
+      F7Icon,
+      F7CardHeader,
+      F7CardContent,
+      auth, db
+    },
+    methods: {
+      Whoami() {
+        console.log("wishlist vuefire", this.wishlistItems)
+        console.log("wishlist db", this.wishlist)
+      },
+      redirect () {
+        console.log("fff")
+        this.$f7router.navigate("/chatbox/")
+      },
+      removeItem (id) {
+        this.wishlist = []
+        const uid = auth.currentUser.uid
+        db.ref('/Users/' + uid + '/wishlist').once('value')
+          .then((data) => {
+            const postObject = data.val()
+            for (let key in postObject) {
+              if (postObject[key] === id) {
+                db.ref('/Users/' + uid + '/wishlist').child(key).remove()
+              } else {
+                this.wishlist.push(postObject[key])
+              }
+            }
+          })
+          .catch(
+            (error) => {
+              console.log(error)
+            }
+          )
+      },
+    },
+    beforeMount () {
+      const uid = auth.currentUser.uid
+      db.ref('/Users/' + uid + '/wishlist').once('value')
+        .then((data) => {
+          const postObject = data.val()
+          for (let key in postObject) {
+            this.wishlist.push(postObject[key])
+          }
+        })
+
     },
   }
 </script>
