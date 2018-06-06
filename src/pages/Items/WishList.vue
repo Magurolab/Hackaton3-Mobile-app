@@ -1,6 +1,5 @@
 <template>
-  <f7-page>
-    <f7-button @click="Whoami" >Who am I</f7-button>
+  <f7-page ptr @ptr:refresh="onRefresh">
     <f7-list>
       <f7-card v-for="card in wishlistCards">
         <f7-card-header>
@@ -63,9 +62,19 @@
       auth, db
     },
     methods: {
-      Whoami() {
-        console.log("wishlist vuefire", this.wishlistItems)
-        console.log("wishlist db", this.wishlist)
+      onRefresh(event, done){
+
+        setTimeout(() => {
+          const uid = auth.currentUser.uid
+          db.ref('/Users/' + uid + '/wishlist').once('value')
+            .then((data) => {
+              const postObject = data.val()
+              for (let key in postObject) {
+                this.wishlist.push(postObject[key])
+              }
+              done()
+            })
+        },1000);
       },
       redirect () {
         console.log("fff")
