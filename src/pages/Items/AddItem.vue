@@ -104,7 +104,7 @@ export default {
           Vue.cordova.camera.getPicture((imageURI) => {
             this.uri = imageURI
             this.file = cfUploadFile(imageURI, "image/jpeg")
-            window.alert('Photo URI : ' + imageURI)
+            window.alert('Photo URI : ' + imageURI + 'this uri: ' + this.uri)
           }, (message) => {
             window.alert('FAILED : ' + message)
           }, {
