@@ -71,9 +71,7 @@
         const user1_id = auth.currentUser.uid
         // console.log('usr2Id = '+ user2_id)
         createChatRoom(user1_id, user2_id)
-        this.$f7router.navigate("/chatbox/")
-
-
+        this.$f7router.navigate("/inbox/")
       },
       // onLoadItem (id) {
       //   this.$router.push('/items/' + id)
