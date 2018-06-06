@@ -13,6 +13,24 @@
       <f7-button @click="signOut" >Log out</f7-button>
     </div>
 
+    <f7-list>
+      <f7-card v-for="card in userCards">
+        <f7-card-header>
+          {{card.user}}
+          <f7-button @click="remove(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+        </f7-card-header>
+        <f7-card-content>
+          <img :src="card.url" width="100%"/>
+        </f7-card-content>
+        <f7-card-footer>
+          {{"Item: " + card.name}}
+          <br/>
+          {{"$"+card.price}}
+          <br/>
+          {{"Description: " + card.description}}
+        </f7-card-footer>
+      </f7-card>
+    </f7-list>
   </f7-page>
 </template>
 <script>
@@ -24,14 +42,18 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        cards: {}
       }
     },
     firebase: () => ({
       userInfo: {
         source: db.ref(`Users/${auth.currentUser.uid}`)
         ,asObject: true
-      }
+      },
+      cards:{
+        source: db.ref('/Posts')
+      },
     }),
     components: {
       F7Page,
@@ -39,16 +61,12 @@
       auth, db
     },
     computed: {
-      // userInfo() {
-      //   let currentuserInfo = null;
-      //   const uid = auth.currentUser.uid
-      //   const ref = db.ref('Users/' + uid)
-      //   ref.on('value', function (snapshot.val()) {
-      //     console.log("snapshot:", snapshot)
-      //     currentuserInfo = snapshot.val()
-      //   });
-      //   return currentuserInfo
-      // },
+      userCards () {
+        const c = this.cards
+        return c.filter(function(u){
+          return u.userid===auth.currentUser.uid
+        })
+      }
     },
     methods: {
       userEmail(){
@@ -62,6 +80,16 @@
       },
       Whoami() {
         console.log("current user ",auth)
+      },
+      redirect (user2_id) {
+        console.log("redicrct to chatroom")
+        const user1_id = auth.currentUser.uid
+        createChatRoom(user1_id, user2_id)
+        this.$f7router.navigate("/chatbox/")
+      },
+      remove (id) {
+        console.log(id)
+        db.ref('Posts/').child(id).remove()
       }
     },
     created: function () {
