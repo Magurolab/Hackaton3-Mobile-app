@@ -52,6 +52,7 @@
   import { createMessage } from './MessageSyetem/MessageUtils.js'
   import { auth }from './../../firebase.js'
   export default {
+    props: ['chatID'],
     data() {
       return {
         attachments: [],

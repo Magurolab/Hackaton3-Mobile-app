@@ -74,7 +74,7 @@
       },
       signOut() {
         auth.signOut().then(()=>{
-          console.log("current user" + auth.currentUser)
+          // console.log("current user" + auth.currentUser)
         })
         this.$f7router.navigate('/signin/')
       },
@@ -93,7 +93,7 @@
       }
     },
     created: function () {
-      console.log('current user on profile', auth.currentUser)
+      // console.log('current user on profile', auth.currentUser)
     },
 
   }

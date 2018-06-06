@@ -63,8 +63,11 @@
       redirect (user2_id) {
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid
+        // console.log('usr2Id = '+ user2_id)
         createChatRoom(user1_id, user2_id)
         this.$f7router.navigate("/chatbox/")
+
+
       },
       addWishlist (id) {
         const uid = auth.currentUser.uid
