@@ -30,6 +30,7 @@
     firebase: () => ({
       userInfo: {
         source: db.ref(`Users/${auth.currentUser.uid}`)
+        ,asObject: true
       }
     }),
     components: {

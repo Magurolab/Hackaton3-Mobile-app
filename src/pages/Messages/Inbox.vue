@@ -37,9 +37,10 @@
     watch: {
       chatId_lst: function () {
         console.log("something get update chatId_lst change")
-        console.log(this.chatId_lst);
-        console.log(auth.currentUser.uid);
+        // console.log(this.chatId_lst);
+        // console.log(auth.currentUser.uid);
         const uid = auth.currentUser.uid;
+        // if(this.chatId_lst() === null)
         // chats = getCurrentChats(uid, this.chatId_lst)
       }
     },
