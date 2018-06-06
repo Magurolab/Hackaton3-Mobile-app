@@ -17,7 +17,7 @@
       <f7-card v-for="card in userCards">
         <f7-card-header>
           {{card.user}}
-          <f7-button @click="remove(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <f7-button @click="remove(card['.key'])"><f7-icon f7="trash" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
