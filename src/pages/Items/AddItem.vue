@@ -197,7 +197,7 @@ export default {
     },
   },
   created: function () {
-    console.log('current user on profile', auth.currentUser.email)
+    // console.log('current user on profile', auth.currentUser.email)
   },
 }
 </script>

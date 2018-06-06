@@ -21,6 +21,8 @@
       <f7-list-item link="/signin/" title="Sign In"></f7-list-item>
       <f7-list-item link="/signup/" title="Sign Up"></f7-list-item>
       <f7-list-item link="/photo/" title="Upload photo"></f7-list-item>
+      <f7-button @click="Whoami" >Who am I</f7-button>
+      <f7-button @click="signOut" >SignOut</f7-button>
 
     </f7-list>
 
@@ -33,5 +35,25 @@
   </f7-page>
 </template>
 <script>
-export default {}
+  import {auth} from "../firebase"
+export default {
+  methods: {
+    userEmail(){
+      return auth.currentUser.email
+    },
+    signOut() {
+      auth.signOut().then(()=>{
+        console.log("current user" + auth.currentUser)
+      })
+      this.$f7router.navigate('/signin/')
+    },
+    Whoami() {
+      console.log("current user ",auth.currentUser.email)
+    }
+  },
+  created: function () {
+    console.log('current user on profile', auth.currentUser)
+  },
+
+}
 </script>

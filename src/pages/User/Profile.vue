@@ -4,63 +4,56 @@
 
     <div class="card demo-facebook-card">
       <div class="card-header">
-        <div class="demo-facebook-name">{{user.username}}</div>
-        <div class="demo-facebook-date">Email: {{user.email}}</div>
-        <div class="demo-facebook-date">University: {{user.university}}</div>
-        <div class="demo-facebook-date">Description: {{user.description}}</div>
+        <div class="demo-facebook-name">{{userInfo.username}}</div>
+        <div class="demo-facebook-date">Email: {{userInfo.email}}</div>
+        <div class="demo-facebook-date">University: {{userInfo.university}}</div>
+        <div class="demo-facebook-date">Description: {{userInfo.description}}</div>
       </div>
-      <f7-button @click="Whoami" >Who am I</f7-button>
+
       <f7-button @click="signOut" >Log out</f7-button>
     </div>
+
   </f7-page>
 </template>
 <script>
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
-  import { auth, db } from '../../firebase'
+  import firebase, { auth, db } from '../../firebase'
+  // console.log("AAA", JSON.stringify(firebase.auth()));
   export default {
     data() {
       return {
-        user: {},
-        users:{},
+        email: '',
+        password: ''
       }
     },
-    firebase: function () {
-      return {
-        user:{
-          source: db.ref('Users/' + auth.currentUser.uid),
-          asObject: true,
-        },
-        users:{
-          source: db.ref('/Users/')
-        },
+    firebase: () => ({
+      userInfo: {
+        source: db.ref(`Users/${auth.currentUser.uid}`)
+        ,asObject: true
       }
-    },
+    }),
     components: {
       F7Page,
       F7View,
       auth, db
     },
-    // computed: {
-    //   userInfo() {
-    //     var currentuserInfo = null;
-    //     const uid = auth.currentUser.uid
-    //     const ref = db.ref('Users/' + uid)
-    //     ref.once('value', function (snapshot) {
-    //       currentuserInfo = snapshot.val()
-    //     })
-    //     return currentuserInfo
-    //   },
-    // },
-    watch: {
-      user: ()=>{
-        console.log("yooo")
-      },
-      users: ()=>{
-        console.log("new user")
-      }
+    computed: {
+      // userInfo() {
+      //   let currentuserInfo = null;
+      //   const uid = auth.currentUser.uid
+      //   const ref = db.ref('Users/' + uid)
+      //   ref.on('value', function (snapshot.val()) {
+      //     console.log("snapshot:", snapshot)
+      //     currentuserInfo = snapshot.val()
+      //   });
+      //   return currentuserInfo
+      // },
     },
     methods: {
+      userEmail(){
+        return auth.currentUser.email
+      },
       signOut() {
         auth.signOut().then(()=>{
           console.log("current user" + auth.currentUser)
@@ -68,12 +61,11 @@
         this.$f7router.navigate('/signin/')
       },
       Whoami() {
-        console.log("current user ", auth.currentUser.uid)
-        console.log("users ", this.user)
+        console.log("current user ",auth)
       }
     },
     created: function () {
-      console.log('current user on profile', auth.currentUser.uid)
+      console.log('current user on profile', auth.currentUser)
     },
 
   }

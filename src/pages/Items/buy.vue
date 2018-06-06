@@ -18,7 +18,7 @@
       <f7-card v-for="card in cards">
         <f7-card-header>
           {{card.user}}
-          <f7-button @click="redirect" ><f7-icon material="send"></f7-icon></f7-button>
+          <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
           <f7-button><f7-icon f7="heart_fill" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
@@ -43,6 +43,8 @@
   import F7CardHeader from "framework7-vue/src/components/card-header";
   import F7Icon from "framework7-vue/src/components/icon";
   import F7Button from "framework7-vue/src/components/button";
+  import { createChatRoom } from "../Messages/MessageSyetem/MessageUtils";
+
   export default {
     data () {
       return {
@@ -64,9 +66,14 @@
       auth, db
     },
     methods: {
-      redirect () {
-        console.log("fff")
+      redirect (user2_id) {
+        console.log("redicrct to chatroom")
+        const user1_id = auth.currentUser.uid
+        // console.log('usr2Id = '+ user2_id)
+        createChatRoom(user1_id, user2_id)
         this.$f7router.navigate("/chatbox/")
+
+
       },
       // onLoadItem (id) {
       //   this.$router.push('/items/' + id)

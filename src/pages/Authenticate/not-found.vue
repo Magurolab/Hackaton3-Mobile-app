@@ -1,4 +1,4 @@
-<template>
+ <template>
   <f7-page>
     <f7-navbar title="Not found" back-link="Back"></f7-navbar>
     <f7-block strong>

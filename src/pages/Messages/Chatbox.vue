@@ -49,6 +49,8 @@
   </f7-page>
 </template>
 <script>
+  import { createMessage } from './MessageSyetem/MessageUtils.js'
+  import { auth }from './../../firebase.js'
   export default {
     data() {
       return {
@@ -67,6 +69,7 @@
           'http://lorempixel.com/400/300/cats/9/',
           'http://lorempixel.com/300/150/cats/10/',
         ],
+        receiver: null //might need it for rendering on top of the chat
       };
     },
     computed: {
@@ -98,9 +101,15 @@
         }
       },
       sendMessage() {
+        console.log("sendMessage get call!!!")
         const self = this;
         const text = self.messagebar.getValue().replace(/\n/g, '<br>').trim();
         // the rest of logic to send a message
+
+        const senderId = auth.currentUser.uid
+        const roomId = null // need to get it by passing it in.
+        createMessage(senderId, roomId, text);
+
       },
       onF7Ready() {
         const self = this;
