@@ -1,5 +1,5 @@
 <template>
-  <f7-page>
+  <f7-page ptr @ptr:refresh="onRefresh">
     <f7-list>
       <f7-card v-for="card in displayCards">
         <f7-card-header>
@@ -60,6 +60,17 @@
       }
     },
     methods: {
+      onRefresh(event, done){
+        setTimeout(() => {
+          db.ref('/Posts/').once('value')
+            .then((data) => {
+              this.cards = null
+              const postObject = data.val()
+              this.cards = postObject
+              done()
+              })
+        },1000);
+      },
       redirect (user2_id) {
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid

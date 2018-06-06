@@ -49,12 +49,13 @@
       userSignIn () {
         auth.signInWithEmailAndPassword(this.email,this.password)
           .then(authUser => {
-            console.log(authUser)
+            this.$f7router.navigate('/')
           })
           .catch(authError => {
-            alert(authError);
+            this.$f7.dialog.alert(authError, '')
           })
-        this.$f7router.navigate('/')
+
+        // location.reload()
       }
     },
   }
