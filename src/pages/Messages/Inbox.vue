@@ -5,8 +5,15 @@
 
     <f7-block-title>ChatRooms</f7-block-title>
     <f7-list v-for="chat in inboxRenderComponents">
-      <f7-list-item link="/chatbox/" :title="chat.name" ></f7-list-item>
+      <f7-list-item @click="goToChatBox" :title="chat.name" ></f7-list-item>
     </f7-list>
+
+    <f7-popup :opened=popupStart >
+      <f7-button @click='closePopup'> <f7-icon material="arrow_back_ios"></f7-icon> </f7-button>
+      <!--<initiate :gid= this.gid ></initiate>-->
+      <Chatbox></Chatbox>
+    </f7-popup>
+
   </f7-page>
 </template>
 
@@ -15,11 +22,15 @@
   import {auth, db} from "../../firebase";
   import { getCurrentChats,getInboxRenderComponent } from './MessageSyetem/MessageUtils'
   import F7Button from "framework7-vue/src/components/button";
+  import Chatbox from "./Chatbox";
+  import F7Icon from "framework7-vue/src/components/icon";
 
   export default {
-    components: {F7Button, F7List},
+    components: {F7Icon, Chatbox, F7Button, F7List},
+    props:[],
     data () {
       return {
+        popupStart:false,
         chatId_lst: {},
         AllChat:{},
         currentChats:{},
@@ -53,7 +64,6 @@
         }
         this.currentChats = data
         this.inboxRenderComponents= getInboxRenderComponent(uid, this.currentChats)
-
       },
     },
     methods: {
@@ -61,6 +71,13 @@
         console.log(this.chatId_lst)
         console.log(auth.currentUser.uid)
       },
+      closePopup() {
+        this.popupStart = false
+      },
+      goToChatBox(){
+        this.popupStart =true
+
+      }
 
     }
 

@@ -1,7 +1,7 @@
 <template>
   <f7-page>
-    <f7-navbar title="Messsages" back-link="Back"></f7-navbar>
-
+    <!--<f7-navbar title="Messsages">-->
+    <!--</f7-navbar>-->
     <f7-messagebar
       :placeholder="placeholder"
       ref="messagebar"
@@ -51,8 +51,11 @@
 <script>
   import { createMessage } from './MessageSyetem/MessageUtils.js'
   import { auth }from './../../firebase.js'
+  import F7Button from "framework7-vue/src/components/button";
+  import F7Icon from "framework7-vue/src/components/icon";
   export default {
-    props: ['chatID'],
+    components: {F7Icon, F7Button},
+    props: ['closePopup'],
     data() {
       return {
         attachments: [],

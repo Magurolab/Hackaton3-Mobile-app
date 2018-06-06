@@ -54,7 +54,7 @@
     computed: {
       displayCards(){
         return this.cards.filter(function(u){
-          console.log(u.userid, auth.currentUser.uid,  u.userid !== auth.currentUser.uid)
+          // console.log(u.userid, auth.currentUser.uid,  u.userid !== auth.currentUser.uid)
           return u.userid !== auth.currentUser.uid
         })
       }
@@ -66,6 +66,7 @@
         // console.log('usr2Id = '+ user2_id)
         createChatRoom(user1_id, user2_id)
         this.$f7router.navigate("/inbox/")
+        // location.reload()
 
 
       },
