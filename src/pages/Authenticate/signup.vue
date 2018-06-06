@@ -29,11 +29,14 @@
           <option v-for="college in this.colleges" :value="college" >{{college}}</option>
         </f7-input>
       </f7-list-item>
-      <f7-list-button
-        @click="userSignUp"
-        title="Create an Account"
-        login-scrren-close
-      ></f7-list-button>
+      <f7-block>
+        <f7-button
+          fill
+          color="orange"
+          @click="userSignUp"
+          login-screen-close>Create an Account</f7-button>
+      </f7-block>
+      <span></span>
       <f7-block-footer>
         <f7-link href="/signin/">Already have an account?</f7-link>
       </f7-block-footer>
