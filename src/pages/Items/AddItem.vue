@@ -14,7 +14,7 @@
 
       <f7-list-item>
         <f7-label>Item Name</f7-label>
-        <f7-input @input="name = $event.target.value" type="text" placeholder="Name"></f7-input>
+        <f7-input @input="name = $event.target.value" type="text" placeholder="Name" required validate></f7-input>
       </f7-list-item>
 
       <f7-list-item>
@@ -26,7 +26,7 @@
 
       <f7-list-item>
         <f7-label>Category</f7-label>
-        <f7-input @input="category = $event.target.value" type="select">
+        <f7-input @input="category = $event.target.value" type="select" required validate>
           <option value="Book">Book</option>
           <option value="Clothing">Clothing</option>
           <option value="Electronics">Electronics</option>
@@ -37,7 +37,7 @@
 
       <f7-list-item>
         <f7-label>Price</f7-label>
-        <f7-input @input="price = $event.target.value" type="text" placeholder="฿"></f7-input>
+        <f7-input @input="price = $event.target.value" type="text" placeholder="฿" required validate></f7-input>
       </f7-list-item>
 
       <f7-list-item>
@@ -74,6 +74,7 @@ import F7Label from "framework7-vue/src/components/label";
 import F7BlockFooter from "framework7-vue/src/components/block-footer";
 import Vue from 'vue'
 import {auth,db} from "../../firebase";
+import * as app from "framework7";
 
 export default {
   components: {
@@ -90,7 +91,7 @@ export default {
       currentuser: auth.currentUser,
       name: '',
       price: '',
-      description: '',
+      description: 'No description',
       category: '',
       file: null,
       uri: '',
@@ -172,6 +173,10 @@ export default {
       return userInfo
     },
     addProduct() {
+      if(!this.name||!this.price||!this.category){
+        this.$f7.dialog.alert('Dont leave field(s) blank.', ' ')
+        return
+      }
       var userInfo = null;
       const uid = auth.currentUser.uid
       const ref = db.ref('Users/' + uid)
@@ -193,7 +198,7 @@ export default {
       updates['/Posts/' + postKey] = postData
       db.ref().update(updates)
       console.log("added " + this.name + "to the db")
-      this.$f7router.navigate('/buy/')
+      this.$f7.dialog.alert('Item added', ' ')
     },
   },
   created: function () {
