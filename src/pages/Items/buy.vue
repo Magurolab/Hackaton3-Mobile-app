@@ -29,7 +29,7 @@
   import F7CardHeader from "framework7-vue/src/components/card-header";
   import F7Icon from "framework7-vue/src/components/icon";
   import F7Button from "framework7-vue/src/components/button";
-  import { createChatRoom } from "../Messages/MessageSyetem/MessageUtils";
+  import { createMessage, createChatRoom } from "../Messages/MessageSyetem/MessageUtils";
 
   export default {
     data () {
@@ -64,8 +64,9 @@
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid
         // console.log('usr2Id = '+ user2_id)
-        createChatRoom(user1_id, user2_id)
-        this.$f7router.navigate("/inbox/")
+        const chatId=createChatRoom(user1_id, user2_id)
+        console.log(chatId)
+        // this.$f7router.navigate("/inbox/")
         // location.reload()
 
 

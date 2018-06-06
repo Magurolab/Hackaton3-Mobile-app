@@ -43,15 +43,17 @@ export const createChatRoom = (uid_1, uid_2) => {
             }
           }
         )
+      return key
     })
 }
 
-export const createMessage = (senderId, roomId,newMessageText) =>{
+export const createMessage = (senderName,senderId, roomId,newMessageText) =>{
   console.log("creteMessage get call")
   const NewMessage = {
     text: newMessageText,
     date: date.toLocaleString(),
-    sender: senderId
+    sender: senderId,
+    name: senderName
   }
   db.ref('ChatRooms/'+roomId+'/MessagePool').transaction(currentMessages => {
     if(currentMessages ===  null){
@@ -73,8 +75,8 @@ export const getCurrentChats = (uid, chatId_lst, allChat) =>{
       }
     }
   }
-  console.log('about to return')
-  console.log(currentChats)
+  // console.log('about to return')
+  // console.log(currentChats)
   if(currentChats.length === 0){
     return null
   }
@@ -88,11 +90,13 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
     if(c.user1.userId === uid){
       tmp.push({
         name:c.user2.username,
+        uid:c.user2.userId,
         chatId:c['.key']
       })
     }else if(c.user2.userId === uid){
       tmp.push({
         name:c.user1.username,
+        uid:c.user1.userId,
         chatId:c['.key']
       })
     }
@@ -102,4 +106,7 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
   }
   // console.log(ret)
   return ret
+}
+export const deleteChat = (chatId) =>{
+  console.log('deleting chat')
 }
