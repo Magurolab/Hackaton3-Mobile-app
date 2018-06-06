@@ -1,7 +1,7 @@
 <template>
   <f7-page>
     <f7-list>
-      <f7-card v-for="card in cards">
+      <f7-card v-for="card in displayCards">
         <f7-card-header>
           {{card.user}}
           <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
@@ -50,6 +50,14 @@
       F7CardHeader,
       F7CardContent,
       auth, db
+    },
+    computed: {
+      displayCards(){
+        return this.cards.filter(function(u){
+          console.log(u.userid, auth.currentUser.uid,  u.userid !== auth.currentUser.uid)
+          return u.userid !== auth.currentUser.uid
+        })
+      }
     },
     methods: {
       redirect (user2_id) {
