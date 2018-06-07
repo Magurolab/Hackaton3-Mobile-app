@@ -5,13 +5,13 @@
 
     <f7-block-title>ChatRooms</f7-block-title>
     <f7-list v-for="chat in inboxRenderComponents">
-      <f7-list-item @click="goToChatBox" :title="chat.name" ></f7-list-item>
+      <f7-list-item @click="goToChatBox(chat.chatId, chat.name, chat.uid)" :title="chat.name" ></f7-list-item>
     </f7-list>
 
     <f7-popup :opened=popupStart >
-      <!--<f7-button @click='closePopup'> <f7-icon material="arrow_back_ios"></f7-icon> </f7-button>-->
+      <f7-button icon-f7="left_arrow" @click='closePopup'></f7-button>
       <!--<initiate :gid= this.gid ></initiate>-->
-      <Chatbox @closePopup="closePopup"></Chatbox>
+      <Chatbox :c_id="chosenChat_id" :targetName="targetName" :targetId="targetId"> </Chatbox>
     </f7-popup>
 
   </f7-page>
@@ -24,13 +24,17 @@
   import F7Button from "framework7-vue/src/components/button";
   import Chatbox from "./Chatbox";
   import F7Icon from "framework7-vue/src/components/icon";
+  import F7Link from "framework7-vue/src/components/link";
 
   export default {
-    components: {F7Icon, Chatbox, F7Button, F7List},
+    components: {F7Link, F7Icon, Chatbox, F7Button, F7List},
     props:[],
     data () {
       return {
         popupStart:false,
+        chosenChat_id:null,
+        targetName: null,
+        targetId:null,
         chatId_lst: {},
         AllChat:{},
         currentChats:{},
@@ -52,8 +56,11 @@
     },
     watch: {
       chatId_lst: function () {
+        if(this.chatId_lst === null) {
+          return
+        }
         console.log("something get update chatId_lst change")
-        console.log(this.chatId_lst);
+        // console.log(this.chatId_lst);
         // console.log(auth.currentUser.uid);
         const uid = auth.currentUser.uid;
         const data = getCurrentChats(uid, this.chatId_lst, this.AllChat)
@@ -64,6 +71,7 @@
         }
         this.currentChats = data
         this.inboxRenderComponents= getInboxRenderComponent(uid, this.currentChats)
+        console.log(this.inboxRenderComponents)
       },
     },
     methods: {
@@ -73,9 +81,14 @@
       },
       closePopup() {
         this.popupStart = false
+        console.log('hello from close popup')
       },
-      goToChatBox(){
+      goToChatBox(c_id, name, uid){
+        this.chosenChat_id = c_id;
+        this.targetName = name
+        this.targetId = uid
         this.popupStart =true
+        // console.log('hellooo c_id= '+this.chatId_lst)
 
       }
 
