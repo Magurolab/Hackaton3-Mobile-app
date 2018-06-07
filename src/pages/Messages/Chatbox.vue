@@ -121,7 +121,8 @@
         this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
       },
       dataFromDB:function(){
-        this.messagesData = getMessagesData(this.dataFromDB, this.c_id)
+        const currentUserId = auth.currentUser.uid;
+        this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
       }
     },
     computed: {
