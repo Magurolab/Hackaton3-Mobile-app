@@ -2,7 +2,7 @@
   <f7-page login-screen>
     <header>
       <div class="heading">
-        <f7-login-screen-title class="city" >Welcome to Aibay</f7-login-screen-title>
+        <f7-login-screen-title class="city" >Welcome to Alibaybay</f7-login-screen-title>
       </div>
     </header>
     <f7-list form>
