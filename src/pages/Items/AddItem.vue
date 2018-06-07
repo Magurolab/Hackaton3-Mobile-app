@@ -42,7 +42,9 @@
 
       <f7-list>
         <f7-block-footer>
+          <div v-if="loading" class="center"><f7-preloader ></f7-preloader></div>
           <f7-button
+            v-else
             @click="addProduct"
             class="col"
             fill >SELL IT!</f7-button>
@@ -78,6 +80,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       currentuser: auth.currentUser,
       name: '',
       price: '',
@@ -124,6 +127,7 @@ export default {
       return userInfo
     },
     addProduct() {
+      this.loading = true
       if(!this.name||!this.price||!this.category){
         this.$f7.dialog.alert('Dont leave field(s) blank.', ' ')
         return
@@ -134,7 +138,7 @@ export default {
         description: this.description,
         category: this.category
       }
-      var app = this.$f7
+      var app = this
       var userInfo = null;
       const uid = auth.currentUser.uid
       const ref = db.ref('Users/' + uid)
@@ -156,6 +160,7 @@ export default {
             break
           case firebase.storage.TaskState.SUCCESS:
             console.log('Upload success')
+
         }
       }, function (error) {
         console.log(error)
@@ -177,8 +182,10 @@ export default {
         })
         updates['/Posts/' + postKey] = postData
         db.ref().update(updates)
-        app.dialog.alert('Item added', ' ')
+        app.loading = false
+        app.$f7.dialog.alert('Item added', ' ')
       })
+
     },
   },
   created: function () {
@@ -186,3 +193,43 @@ export default {
   },
 }
 </script>
+<style scoped>
+  header {
+    background: url(../../../static/clem.jpg) no-repeat;
+    background-size: cover;
+    min-height:14em;
+    position: relative;
+    z-index: -2;
+  }
+  .center{
+    text-align: center;
+  }
+
+  .heading{
+    padding: 0 1em 1em 1em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    box-sizing: border-box;
+  }
+
+  .heading::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(255,255,255, 0), rgba(8,61, 80, 0.9));
+    z-index: -1;
+    /*//  opacity:0.8;*/
+  }
+  .city{
+    font-size: 2.3em;
+    font-weight: 450;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #fff;
+  }
+</style>
