@@ -22,8 +22,6 @@ import InboxPage from './pages/Messages/Inbox';
 import ChatboxPage from './pages/Messages/Chatbox';
 
 import ProfilePage from './pages/User/Profile';
-import Upload from './pages/TestUpload'
-
 
 export default [
   {
@@ -81,10 +79,6 @@ export default [
   {
     path: '/profile/',
     component: ProfilePage,
-  },
-  {
-    path: '/photo/',
-    component: Upload,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

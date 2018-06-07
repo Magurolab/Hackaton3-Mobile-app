@@ -20,7 +20,6 @@
       <f7-list-item link="/home/" title="Home"></f7-list-item>
       <f7-list-item link="/signin/" title="Sign In"></f7-list-item>
       <f7-list-item link="/signup/" title="Sign Up"></f7-list-item>
-      <f7-list-item link="/photo/" title="Upload photo"></f7-list-item>
       <f7-button @click="Whoami" >Who am I</f7-button>
       <f7-button @click="signOut" >SignOut</f7-button>
 

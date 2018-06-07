@@ -126,45 +126,6 @@ export default {
     myURI () {
       window.alert("plugins: " + this.uri)
     },
-    // addItem () {
-    //   // console.log(this.description)
-    //   var fileName = payload.file.name
-    //   var storageRef = firebase.storage().ref('images/' + fileName)
-    //   var uploadTask = storageRef.put(payload.file)
-    //   uploadTask.on('state_changed', function (snapshot) {
-    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     console.log('Upload is ' + progress + '% done')
-    //     switch (snapshot.state) {
-    //       case firebase.storage.TaskState.PAUSED: // or 'paused'
-    //         console.log('Upload is paused')
-    //         break
-    //       case firebase.storage.TaskState.RUNNING: // or 'running'
-    //         console.log('Upload is running')
-    //         break
-    //       case firebase.storage.TaskState.SUCCESS:
-    //         console.log('Upload success')
-    //     }
-    //   }, function (error) {
-    //     console.log(error)
-    //   }, function () {
-    //     const uid = auth.currentUser.uid
-    //     var postKey = db.ref('Posts/').push().key
-    //     var updates = {}
-    //     var postData = {
-    //       name: payload.name,
-    //       description: payload.description,
-    //       price: payload.price,
-    //       category: payload.category,
-    //       user: uid,
-    //       url: ''
-    //     }
-    //     uploadTask.snapshot.ref.getDownloadURL().then(url => {
-    //       db.ref('Posts/' + postKey + '/url').set(url)
-    //     })
-    //     updates['/Posts/' + postKey] = postData
-    //     db.ref().update(updates)
-    //   })
-    // },
     userInfo(){
       var userInfo = null;
       const uid = auth.currentUser.uid
@@ -229,18 +190,11 @@ export default {
         updates['/Posts/' + postKey] = postData
         db.ref().update(updates)
         app.dialog.alert('Item added', ' ')
-        // console.log('File available at', downloadURL)
       })
-      // console.log(userInfo.username)
-
-      // updates['/Posts/' + postKey] = postData
-      // db.ref().update(updates)
-      // console.log("added " + this.name + "to the db")
-
     },
   },
-  created: function () {
+  // created: function () {
     // console.log('current user on profile', auth.currentUser.email)
-  },
+  // },
 }
 </script>
