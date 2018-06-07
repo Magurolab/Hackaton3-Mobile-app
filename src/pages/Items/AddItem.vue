@@ -20,7 +20,8 @@
       <f7-list-item>
         <div>
           <f7-label>Photo</f7-label>
-          <f7-button> Add a photo</f7-button>
+          <p>My File Selector: <file-select v-model="file"></file-select></p>
+          <p v-if="file">{{file.name}}</p>
         </div>
       </f7-list-item>
 
@@ -57,10 +58,6 @@
         </f7-block-footer>
       </f7-list>
     </f7-list>
-    <div v-for="(pluginTest, plugin) in plugins" :class="{ ok: pluginEnabled(plugin) }" @click="pluginTest">
-      <span></span>{{ plugin }}
-    </div>
-    <div v-if="cordova">{{ cordova }}</div>
 
   </f7-page>
 </template>
@@ -68,13 +65,14 @@
 <script>
 import F7List from "framework7-vue/src/components/list";
 import F7ListItem from "framework7-vue/src/components/list-item";
-import FileSelect from './../../components/Items/FileSelect'
+// import FileSelect from './../../components/Items/FileSelect'
 import F7Button from "framework7-vue/src/components/button";
 import F7Label from "framework7-vue/src/components/label";
 import F7BlockFooter from "framework7-vue/src/components/block-footer";
 import Vue from 'vue'
-import {auth,db} from "../../firebase";
-import * as app from "framework7";
+import {auth,db, storage} from "../../firebase";
+import FileSelect from './FileSelect'
+import firebase from 'firebase'
 
 export default {
   components: {
@@ -124,45 +122,6 @@ export default {
     myURI () {
       window.alert("plugins: " + this.uri)
     },
-    // addItem () {
-    //   // console.log(this.description)
-    //   var fileName = payload.file.name
-    //   var storageRef = firebase.storage().ref('images/' + fileName)
-    //   var uploadTask = storageRef.put(payload.file)
-    //   uploadTask.on('state_changed', function (snapshot) {
-    //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     console.log('Upload is ' + progress + '% done')
-    //     switch (snapshot.state) {
-    //       case firebase.storage.TaskState.PAUSED: // or 'paused'
-    //         console.log('Upload is paused')
-    //         break
-    //       case firebase.storage.TaskState.RUNNING: // or 'running'
-    //         console.log('Upload is running')
-    //         break
-    //       case firebase.storage.TaskState.SUCCESS:
-    //         console.log('Upload success')
-    //     }
-    //   }, function (error) {
-    //     console.log(error)
-    //   }, function () {
-    //     const uid = auth.currentUser.uid
-    //     var postKey = db.ref('Posts/').push().key
-    //     var updates = {}
-    //     var postData = {
-    //       name: payload.name,
-    //       description: payload.description,
-    //       price: payload.price,
-    //       category: payload.category,
-    //       user: uid,
-    //       url: ''
-    //     }
-    //     uploadTask.snapshot.ref.getDownloadURL().then(url => {
-    //       db.ref('Posts/' + postKey + '/url').set(url)
-    //     })
-    //     updates['/Posts/' + postKey] = postData
-    //     db.ref().update(updates)
-    //   })
-    // },
     userInfo(){
       var userInfo = null;
       const uid = auth.currentUser.uid
@@ -177,28 +136,64 @@ export default {
         this.$f7.dialog.alert('Dont leave field(s) blank.', ' ')
         return
       }
+      var payload = {
+        name: this.name,
+        price: this.price,
+        description: this.description,
+        category: this.category
+      }
+      var app = this.$f7
       var userInfo = null;
       const uid = auth.currentUser.uid
       const ref = db.ref('Users/' + uid)
       ref.on('value', function (snapshot) {
         userInfo = snapshot.val()
       })
-      console.log(userInfo.username)
-      var postKey = db.ref('Posts/').push().key
-      var updates = {}
-      var postData = {
-        name: this.name,
-        description: this.description,
-        price: this.price,
-        category: this.category,
-        userid: uid,
-        user: userInfo.username,
-        url: 'https://firebasestorage.googleapis.com/v0/b/hackaton3-e8c2f.appspot.com/o/29342404_1651558714912885_8821876827908993035_n.jpg?alt=media&token=fd2ea1fb-f3e6-441a-a936-20144f80f2d6'
-      }
-      updates['/Posts/' + postKey] = postData
-      db.ref().update(updates)
-      console.log("added " + this.name + "to the db")
-      this.$f7.dialog.alert('Item added', ' ')
+      var fileName = this.file.name
+      var storageRef = firebase.storage().ref('images/' + fileName)
+      var uploadTask = storageRef.put(this.file)
+      uploadTask.on('state_changed', function (snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log('Upload is ' + progress + '% done')
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused')
+            break
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running')
+            break
+          case firebase.storage.TaskState.SUCCESS:
+            console.log('Upload success')
+        }
+      }, function (error) {
+        console.log(error)
+      }, function () {
+        console.log(userInfo)
+        var postKey = db.ref('Posts/').push().key
+        var updates = {}
+        var postData = {
+          name: payload.name,
+          description: payload.description,
+          price: payload.price,
+          category: payload.category,
+          userid: uid,
+          user: userInfo.username,
+          url: 'https://firebasestorage.googleapis.com/v0/b/hackaton3-e8c2f.appspot.com/o/29342404_1651558714912885_8821876827908993035_n.jpg?alt=media&token=fd2ea1fb-f3e6-441a-a936-20144f80f2d6'
+        }
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+          db.ref('Posts/' + postKey + '/url').set(url)
+        })
+        updates['/Posts/' + postKey] = postData
+        db.ref().update(updates)
+        app.dialog.alert('Item added', ' ')
+        // console.log('File available at', downloadURL)
+      })
+      // console.log(userInfo.username)
+
+      // updates['/Posts/' + postKey] = postData
+      // db.ref().update(updates)
+      // console.log("added " + this.name + "to the db")
+
     },
   },
   created: function () {
