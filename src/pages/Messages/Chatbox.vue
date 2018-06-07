@@ -69,6 +69,7 @@
     props:['c_id','targetName','targetId'],
     data() {
       return {
+        save_c_id:null,
         title: "Talking to df",
         attachments: [],
         sheetVisible: false,
@@ -117,10 +118,16 @@
       },
       c_id:function(){
         console.log("Yooo c_id")
+        console.log(this.dataFromDB)
+        this.save_c_id = this.c_id
         const currentUserId = auth.currentUser.uid;
         this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
       },
       dataFromDB:function(){
+        if(this.c_id ==null){
+          this.messagesData = []
+          return
+        }
         const currentUserId = auth.currentUser.uid;
         this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
       }
