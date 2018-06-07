@@ -67,8 +67,6 @@ const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
         } else {
           f7.router.navigate('/signin/')
         }
-
-
       }
     }
   })

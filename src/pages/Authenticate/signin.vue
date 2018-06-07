@@ -16,11 +16,14 @@
       </f7-list-item>
     </f7-list>
     <f7-list>
-      <f7-list-button
-        @click="userSignIn"
-        title="Sign In"
-        login-screen-close>
-      </f7-list-button>
+      <f7-block>
+        <f7-button
+          fill
+          color="orange"
+          @click="userSignIn"
+          login-screen-close>Sign In</f7-button>
+      </f7-block>
+      <space></space>
       <f7-block-footer>
         <p>Don't have an account ?</p>
         <f7-link href="/signup/">Signup for Aibay</f7-link>
@@ -34,6 +37,8 @@
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
   import { auth, db } from '../../firebase'
+  import F7ListItem from "framework7-vue/src/components/list-item";
+  import F7Block from "framework7-vue/src/components/block";
 
   export default {
     data () {
@@ -43,6 +48,8 @@
       }
     },
     components: {
+      F7Block,
+      F7ListItem,
       F7Page,
       F7View},
     methods: {
@@ -50,6 +57,7 @@
         auth.signInWithEmailAndPassword(this.email,this.password)
           .then(authUser => {
             this.$f7router.navigate('/')
+            location.reload(true)
           })
           .catch(authError => {
             this.$f7.dialog.alert(authError, '')

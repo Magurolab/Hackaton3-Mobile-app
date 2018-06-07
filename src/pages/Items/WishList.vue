@@ -5,7 +5,7 @@
         <f7-card-header>
           {{card.user}}
           <f7-button @click="redirect" ><f7-icon material="send"></f7-icon></f7-button>
-          <f7-button @click="removeItem(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <f7-button @click="removeItem(card['.key'])"><f7-icon material="delete" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
@@ -63,7 +63,7 @@
     },
     methods: {
       onRefresh(event, done){
-
+        this.wishlist = []
         setTimeout(() => {
           const uid = auth.currentUser.uid
           db.ref('/Users/' + uid + '/wishlist').once('value')
