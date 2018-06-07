@@ -98,7 +98,8 @@
               description: 'No description yet'
             })
             app.dialog.alert(`username: ${this.username} success!`)
-            this.$f7router.navigate('/App/')
+            this.$f7router.navigate('/')
+            location.reload(true)
           })
           .catch(authError => {
             app.dialog.alert(authError);
