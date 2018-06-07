@@ -5,7 +5,7 @@
       <f7-card v-for="card in wishlistCards">
         <f7-card-header>
           {{card.user}}
-          <f7-button @click="redirect" ><f7-icon material="send"></f7-icon></f7-button>
+          <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
           <f7-button @click="removeItem(card['.key'])"><f7-icon material="delete" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
@@ -30,6 +30,7 @@
   import F7CardHeader from "framework7-vue/src/components/card-header";
   import F7Icon from "framework7-vue/src/components/icon";
   import F7Button from "framework7-vue/src/components/button";
+  import { createMessage, createChatRoom } from "../Messages/MessageSyetem/MessageUtils";
 
   export default {
     data () {
@@ -77,9 +78,17 @@
             })
         },1000);
       },
-      redirect () {
-        console.log("fff")
-        this.$f7router.navigate("/chatbox/")
+      async redirect (user2_id) {
+        const user1_id = auth.currentUser.uid;
+        const chatId = await createChatRoom(user1_id, user2_id);
+        const text = "Hello, I am interested in your product."
+        // console.log(chatId)
+        createMessage(user1_id, chatId, text)
+        this.$f7.dialog.alert("Your chat room has been created.", '')
+        // this.$f7router.navigate("/inbox/")
+        // location.reload()
+
+
       },
       removeItem (id) {
         this.wishlist = []
