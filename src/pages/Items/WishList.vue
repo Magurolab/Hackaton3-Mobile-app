@@ -1,5 +1,6 @@
 <template>
   <f7-page ptr @ptr:refresh="onRefresh">
+    <f7-block-title>Wish List</f7-block-title>
     <f7-list>
       <f7-card v-for="card in wishlistCards">
         <f7-card-header>
