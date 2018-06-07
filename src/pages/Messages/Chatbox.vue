@@ -2,7 +2,7 @@
   <f7-view>
   <f7-page>
     <f7-navbar :title=title >
-      <f7-nav-left back-link="Back" @click.end=""/>
+      <f7-nav-left back-link="Back" v-on:back-click="clicker"/>
     </f7-navbar>
     <!--<f7-button @click="$emit('closePopup')"><f7-icon material="arrow_back_ios"></f7-icon></f7-button>-->
     <f7-messagebar
@@ -12,12 +12,12 @@
       :sheetVisible="sheetVisible"
     >
       <!-- Link to toggle Sheet -->
-      <f7-link
-        icon-if-ios="f7:camera_fill"
-        icon-if-md="material:camera_alt"
-        slot="inner-start"
-        @click="sheetVisible = !sheetVisible"
-      ></f7-link>
+      <!--<f7-link-->
+        <!--icon-if-ios="f7:camera_fill"-->
+        <!--icon-if-md="material:camera_alt"-->
+        <!--slot="inner-start"-->
+        <!--@click="sheetVisible = !sheetVisible"-->
+      <!--&gt;</f7-link>-->
       <!-- Send Message Link -->
       <f7-link
         icon-if-ios="f7:arrow_up_fill"
@@ -70,21 +70,13 @@
     data() {
       return {
         save_c_id:null,
-        title: "Talking to df",
+        title: "Talking to",
         attachments: [],
         sheetVisible: false,
         // Sheet images available
         images: [
           'http://lorempixel.com/300/300/cats/1/',
           'http://lorempixel.com/200/300/cats/2/',
-          'http://lorempixel.com/400/300/cats/3/',
-          'http://lorempixel.com/300/150/cats/4/',
-          'http://lorempixel.com/150/300/cats/5/',
-          'http://lorempixel.com/300/300/cats/6/',
-          'http://lorempixel.com/300/300/cats/7/',
-          'http://lorempixel.com/200/300/cats/8/',
-          'http://lorempixel.com/400/300/cats/9/',
-          'http://lorempixel.com/300/150/cats/10/',
         ],
         dataFromDB:{},
         messagesData:[
@@ -117,8 +109,8 @@
         this.title = "Talking to "+ this.targetName
       },
       c_id:function(){
-        console.log("Yooo c_id")
-        console.log(this.dataFromDB)
+        // console.log("Yooo c_id")
+        // console.log(this.dataFromDB)
         this.save_c_id = this.c_id
         const currentUserId = auth.currentUser.uid;
         this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
@@ -161,7 +153,10 @@
         }
       },
       sendMessage() {
-        console.log("sendMessage get call!!!")
+        // console.log("chatBox c_id= "+this.c_id)
+        // console.log('targetName= '+this.targetName)
+        // console.log('targetId= '+this.targetId)
+        // console.log("sendMessage get call!!!")
         const self = this;
         const text = self.messagebar.getValue().replace(/\n/g, '<br>').trim();
         // the rest of logic to send a message
@@ -172,9 +167,12 @@
         }
         createMessage(senderId, this.c_id, text);
         // self.attachments = ''
-        console.log("chatBox c_id= "+this.c_id)
-        console.log('targetName= '+this.targetName)
-        console.log('targetId= '+this.targetId)
+
+      },
+      clicker(){
+        // console.log("PattayaBoy")
+
+        this.$emit("on-close")
       },
       onF7Ready() {
         const self = this;
