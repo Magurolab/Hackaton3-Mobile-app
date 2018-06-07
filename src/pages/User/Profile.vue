@@ -1,7 +1,10 @@
 <template>
   <f7-page>
     <f7-navbar title="My Account" back-link="Back"></f7-navbar>
-
+    <img class="zura" src="../../../static/sticker5.png">
+    <f7-list>
+      <f7-block-title>Profile page</f7-block-title>
+    </f7-list>
     <div class="card demo-facebook-card">
       <div class="card-header">
         <div class="demo-facebook-name">{{userInfo.username}}</div>

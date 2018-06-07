@@ -1,6 +1,8 @@
 <template>
   <f7-page ptr @ptr:refresh="onRefresh">
+    <img class="zura" src="../../../static/sticker3.png">
     <f7-list>
+      <f7-block-title>Home - Pull to refresh</f7-block-title>
       <f7-card v-for="card in displayCards">
         <f7-card-header>
           <b>{{card.user}}</b>
@@ -91,6 +93,12 @@
 </script>
 
 <style scoped>
+  .zura {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
   .demo-facebook-card .card-header {
     display: block;
     padding: 10px;

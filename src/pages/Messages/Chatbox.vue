@@ -166,6 +166,7 @@
           return;
         }
         createMessage(senderId, this.c_id, text);
+        self.messagebar.setValue("")
         // self.attachments = ''
 
       },

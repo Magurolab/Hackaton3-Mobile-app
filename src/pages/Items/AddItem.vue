@@ -1,7 +1,10 @@
 <template>
   <f7-page>
     <f7-navbar title="Add Item" back-link="Back"></f7-navbar>
-
+    <img class="zura" src="../../../static/sticker4.png">
+    <f7-list>
+      <f7-block-title>Sell item</f7-block-title>
+    </f7-list>
     <f7-list form>
       <f7-list-item>
         <f7-label>Item Name</f7-label>
@@ -183,6 +186,11 @@ export default {
         updates['/Posts/' + postKey] = postData
         db.ref().update(updates)
         app.loading = false
+        app.name=''
+        app.category=''
+        app.price=''
+        app.description=''
+        app.file=null
         app.$f7.dialog.alert('Item added', ' ')
       })
 
@@ -194,6 +202,12 @@ export default {
 }
 </script>
 <style scoped>
+  .zura {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
   header {
     background: url(../../../static/clem.jpg) no-repeat;
     background-size: cover;

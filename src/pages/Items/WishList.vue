@@ -1,7 +1,8 @@
 <template>
   <f7-page ptr @ptr:refresh="onRefresh">
-    <f7-block-title>Wish List</f7-block-title>
+      <img class="zura" src="../../../static/sticker1.png">
     <f7-list>
+      <f7-block-title>Wishlist - Pull to refresh</f7-block-title>
       <f7-card v-for="card in wishlistCards">
         <f7-card-header>
           {{card.user}}
@@ -126,6 +127,28 @@
 </script>
 
 <style scoped>
+  .zura {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+  header {
+    text-align: center;
+    background: url(../../../static/sticker1.png) no-repeat;
+    /*background-size: cover;*/
+    min-height:10em;
+    /*position: relative;*/
+    /*z-index: -2;*/
+  }
+  .heading{
+    padding: 0 1em 1em 1em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    box-sizing: border-box;
+  }
   .demo-facebook-card .card-header {
     display: block;
     padding: 10px;

@@ -1,8 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar title="Inbox" back-link="Back"></f7-navbar>
-    <!--<f7-button @click="pattaya">Pattaya Boy</f7-button>-->
-
+    <img class="zura" src="../../../static/sticker2.png">
     <f7-block-title>ChatRooms</f7-block-title>
     <f7-list v-for="chat in inboxRenderComponents">
       <f7-list-item @click="goToChatBox(chat.chatId, chat.name, chat.uid)"
@@ -109,31 +108,26 @@
         console.log("This chat about to get del: " + chatId)
         db.ref('ChatRooms').child(chatId).remove()
 
-        db.ref('Users/'+targetId+'/currentChats').once('value')
-          .then((data) => {
-            // console.log(data.val())
-            for(let i in data.val()){
-              console.log(data.val()[i])
-              if(data.val()[i] === chatId){
-                db.ref('Users/'+targetId+'/currentChats').child(i).remove()
-              }
-            }
-          })
-        db.ref('Users/'+currentId+'/currentChats').once('value')
-          .then((data) => {
-            // console.log(data.val())
 
-            for(let i in data.val()){
-              console.log(data.val()[i],chatId, i)
-              if(data.val()[i] === chatId){
-                // console.log(data.val()[i])
-                db.ref('Users/'+currentId+'/currentChats').child(i).remove()
-              }
-            }
-          })
       }
 
     }
 
   }
 </script>
+<style>
+  .zura {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+  header {
+    text-align: center;
+    background: url(../../../static/sticker1.png) no-repeat;
+    /*background-size: cover;*/
+    min-height:10em;
+    /*position: relative;*/
+    /*z-index: -2;*/
+  }
+</style>
