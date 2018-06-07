@@ -56,6 +56,7 @@
     },
     watch: {
       chatId_lst: function () {
+        console.log("hello from chatId_lst")
         if(this.chatId_lst === null) {
           return
         }
