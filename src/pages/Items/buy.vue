@@ -74,12 +74,10 @@
         },1000);
       },
       async redirect (user2_id) {
-        console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid;
-        // console.log('usr2Id = '+ user2_id)
         const chatId = await createChatRoom(user1_id, user2_id);
-        const text = "Hello I am interested o your porduct."
-        console.log(chatId)
+        const text = "Hello, I am interested in your product."
+        // console.log(chatId)
         createMessage(user1_id, chatId, text)
         this.$f7.dialog.alert("Your chat room has been created.", '')
       },

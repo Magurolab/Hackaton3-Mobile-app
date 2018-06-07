@@ -5,13 +5,24 @@
 
     <f7-block-title>ChatRooms</f7-block-title>
     <f7-list v-for="chat in inboxRenderComponents">
-      <f7-list-item @click="goToChatBox(chat.chatId, chat.name, chat.uid)" :title="chat.name" ></f7-list-item>
+      <f7-list-item @click="goToChatBox(chat.chatId, chat.name, chat.uid)"
+                    swipeout :title="chat.name"
+                    @swipeout:deleted="onSwipeoutDeleted(chat.chatId, chat.uid)">
+
+        <f7-swipeout-actions>
+          <f7-swipeout-button delete>
+            Delete
+          </f7-swipeout-button>
+        </f7-swipeout-actions>
+      </f7-list-item>
     </f7-list>
 
+
+
     <f7-popup :opened=popupStart >
-      <f7-button icon-f7="left_arrow" @click='closePopup'></f7-button>
+      <!--<f7-button icon-f7="left_arrow" @click='closePopup'></f7-button>-->
       <!--<initiate :gid= this.gid ></initiate>-->
-      <Chatbox :c_id="chosenChat_id" :targetName="targetName" :targetId="targetId"> </Chatbox>
+      <Chatbox :c_id="chosenChat_id" :targetName="targetName"  v-on:on-close="closePopup"  :targetId="targetId"> </Chatbox>
     </f7-popup>
 
   </f7-page>
@@ -92,7 +103,34 @@
         this.targetId = uid
         this.popupStart =true
         // console.log('hellooo c_id= '+this.chatId_lst)
+      },
+      onSwipeoutDeleted(chatId, targetId){
+        const currentId = auth.currentUser.uid;
+        console.log("This chat about to get del: " + chatId)
+        db.ref('ChatRooms').child(chatId).remove()
 
+        db.ref('Users/'+targetId+'/currentChats').once('value')
+          .then((data) => {
+            // console.log(data.val())
+            for(let i in data.val()){
+              console.log(data.val()[i])
+              if(data.val()[i] === chatId){
+                db.ref('Users/'+targetId+'/currentChats').child(i).remove()
+              }
+            }
+          })
+        db.ref('Users/'+currentId+'/currentChats').once('value')
+          .then((data) => {
+            // console.log(data.val())
+
+            for(let i in data.val()){
+              console.log(data.val()[i],chatId, i)
+              if(data.val()[i] === chatId){
+                // console.log(data.val()[i])
+                db.ref('Users/'+currentId+'/currentChats').child(i).remove()
+              }
+            }
+          })
       }
 
     }
