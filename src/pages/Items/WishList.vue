@@ -63,7 +63,7 @@
     },
     methods: {
       onRefresh(event, done){
-
+        this.wishlist = []
         setTimeout(() => {
           const uid = auth.currentUser.uid
           db.ref('/Users/' + uid + '/wishlist').once('value')

@@ -94,12 +94,13 @@
               university: this.university,
               description: 'No description yet'
             })
+            app.dialog.alert(`username: ${this.username} success!`)
+            this.$f7router.navigate('/App/')
           })
           .catch(authError => {
-            alert(authError);
+            app.dialog.alert(authError);
           })
-        app.dialog.alert(`username: ${this.username} success!`)
-        this.$f7router.navigate('/')
+
       }
     },
   }

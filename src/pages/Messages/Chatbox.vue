@@ -1,7 +1,8 @@
 <template>
   <f7-page>
-    <!--<f7-navbar title="Messsages">-->
-    <!--</f7-navbar>-->
+    <!--<f7-button @click="$emit('closePopup')"></f7-button>-->
+    <f7-navbar title="Messsages" link-back="back">
+    </f7-navbar>
     <f7-messagebar
       :placeholder="placeholder"
       ref="messagebar"
@@ -55,7 +56,7 @@
   import F7Icon from "framework7-vue/src/components/icon";
   export default {
     components: {F7Icon, F7Button},
-    props: ['closePopup'],
+    // props: ['closePopup'],
     data() {
       return {
         attachments: [],

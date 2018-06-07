@@ -61,12 +61,14 @@
     },
     methods: {
       onRefresh(event, done){
+        this.cards = []
         setTimeout(() => {
           db.ref('/Posts/').once('value')
             .then((data) => {
-              this.cards = null
               const postObject = data.val()
-              this.cards = postObject
+              for (let key in postObject) {
+                this.cards.push(postObject[key])
+              }
               done()
               })
         },1000);

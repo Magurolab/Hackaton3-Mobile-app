@@ -9,9 +9,9 @@
     </f7-list>
 
     <f7-popup :opened=popupStart >
-      <f7-button @click='closePopup'> <f7-icon material="arrow_back_ios"></f7-icon> </f7-button>
+      <!--<f7-button @click='closePopup'> <f7-icon material="arrow_back_ios"></f7-icon> </f7-button>-->
       <!--<initiate :gid= this.gid ></initiate>-->
-      <Chatbox></Chatbox>
+      <Chatbox @closePopup="closePopup"></Chatbox>
     </f7-popup>
 
   </f7-page>

@@ -1,10 +1,10 @@
 <template>
   <f7-page tabbar-fixed with-subnavbar>
-    <f7-navbar title="Home" sliding />
+    <f7-navbar title="Alibaybay" sliding />
 
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar>
-      <f7-link tab-link="#home" active><f7-icon f7="home_fill"></f7-icon></f7-link>
+      <f7-link tab-link="#home" active><f7-icon material="cake"></f7-icon></f7-link>
       <f7-link tab-link="#buy"><f7-icon f7="home_fill"></f7-icon></f7-link>
       <f7-link tab-link="#wishlist"><f7-icon f7="heart_fill"></f7-icon></f7-link>
       <f7-link tab-link="#additem"><f7-icon f7="add_around"></f7-icon></f7-link>
@@ -45,6 +45,11 @@
   import Inbox from './Messages/Inbox'
   import Profile from './User/Profile'
   export default {
+    data(){
+      return{
+        name:''
+      }
+    },
     name: 'Tabs',
     components: {
       'home-page': Home,
@@ -54,5 +59,7 @@
       'inbox-page': Inbox,
       'profile-page': Profile,
     },
+    computed: {
+    }
   };
 </script>
