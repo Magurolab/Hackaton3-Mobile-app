@@ -1,7 +1,7 @@
 <template>
-  <f7-page>
+  <f7-page ptr @ptr:refresh="onRefresh">
     <f7-list>
-      <f7-card v-for="card in cards">
+      <f7-card v-for="card in displayCards">
         <f7-card-header>
           {{card.user}}
           <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
@@ -51,12 +51,37 @@
       F7CardContent,
       auth, db
     },
+    computed: {
+      displayCards(){
+        return this.cards.filter(function(u){
+          // console.log(u.userid, auth.currentUser.uid,  u.userid !== auth.currentUser.uid)
+          return u.userid !== auth.currentUser.uid
+        })
+      }
+    },
     methods: {
+      onRefresh(event, done){
+        this.cards = []
+        setTimeout(() => {
+          db.ref('/Posts/').once('value')
+            .then((data) => {
+              const postObject = data.val()
+              for (let key in postObject) {
+                this.cards.push(postObject[key])
+              }
+              done()
+              })
+        },1000);
+      },
       redirect (user2_id) {
         console.log("redicrct to chatroom")
         const user1_id = auth.currentUser.uid
+        // console.log('usr2Id = '+ user2_id)
         createChatRoom(user1_id, user2_id)
-        this.$f7router.navigate("/chatbox/")
+        this.$f7router.navigate("/inbox/")
+        // location.reload()
+
+
       },
       addWishlist (id) {
         const uid = auth.currentUser.uid

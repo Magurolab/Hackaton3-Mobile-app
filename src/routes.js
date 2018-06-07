@@ -1,3 +1,5 @@
+import App from './App'
+
 import Tabs from './pages/Tabs.vue';
 
 import HomePage from './pages/home.vue';
@@ -24,6 +26,10 @@ import Upload from './pages/TestUpload'
 
 
 export default [
+  {
+    path: '/App/',
+    component: App
+  },
   {
     path: '/',
     component: Tabs,
