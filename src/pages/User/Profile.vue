@@ -17,7 +17,7 @@
       <f7-card v-for="card in userCards">
         <f7-card-header>
           {{card.user}}
-          <f7-button @click="remove(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <f7-button class="button-to-popover" @click="openActionsPopover(card['.key'])"><f7-icon f7="more_round" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
@@ -31,19 +31,21 @@
         </f7-card-footer>
       </f7-card>
     </f7-list>
+
+
   </f7-page>
 </template>
 <script>
   import F7View from "framework7-vue/src/components/view";
   import F7Page from "framework7-vue/src/components/page";
   import firebase, { auth, db } from '../../firebase'
-  // console.log("AAA", JSON.stringify(firebase.auth()));
   export default {
     data() {
       return {
         email: '',
         password: '',
-        cards: {}
+        cards: {},
+        actionGridOpened: false,
       }
     },
     firebase: () => ({
@@ -87,10 +89,35 @@
         createChatRoom(user1_id, user2_id)
         this.$f7router.navigate("/chatbox/")
       },
-      remove (id) {
-        console.log(id)
-        db.ref('Posts/').child(id).remove()
-      }
+      openActionsPopover (id) {
+        const self = this;
+        const app = self.$f7;
+        self.actionsToPopover = app.actions.create({
+            buttons: [
+              {
+                text: 'Are you sure to remove this item?',
+                label: true,
+              },
+              {
+                text: 'Remove',
+                bold: true,
+                onClick: function () {
+                  console.log('removed ', id)
+                  db.ref('Posts/').child(id).remove()
+                  // app.dialog.alert('removed', id)
+                }
+              },
+              {
+                text: 'Cancel',
+                color: 'red',
+              },
+            ],
+            // Need to specify popover target
+            targetEl: self.$el.querySelector('.button-to-popover'),
+          });
+        // Open
+        self.actionsToPopover.open();
+      },
     },
     created: function () {
       // console.log('current user on profile', auth.currentUser)
