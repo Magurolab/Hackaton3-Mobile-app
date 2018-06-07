@@ -105,11 +105,11 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
       })
     }
   })
-  // for(let i = tmp.length-1; i >= 0; i--){
-  //   ret.push(tmp[i])
-  // }
+  for(let i = tmp.length-1; i >= 0; i--){
+    ret.push(tmp[i])
+  }
   console.log(tmp)
-  return tmp
+  return ret
 }
 export const getMessagesData = (dataFromDB, c_id, uid)=>{
   // console.log(c_id)
@@ -122,6 +122,7 @@ export const getMessagesData = (dataFromDB, c_id, uid)=>{
   dataFromDB.forEach(e=>{
     if(e['.key'] == c_id){
       target = e
+      return
     }
   })
   var ret = []
