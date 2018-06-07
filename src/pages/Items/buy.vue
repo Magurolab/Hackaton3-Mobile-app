@@ -81,7 +81,6 @@
         const text = "Hello I am interested o your porduct."
         console.log(chatId)
         createMessage(user1_id,chatId, text)
-
         this.$f7.dialog.alert("Your chat room has been created.", '')
         // this.$f7router.navigate("/inbox/")
         // location.reload()

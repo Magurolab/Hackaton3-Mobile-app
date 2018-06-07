@@ -5,7 +5,7 @@ export const createChatRoom = async (uid_1, uid_2) => {
   //to call...
   //const ret = await createChatRoom(...)
   // cannot get Room ID!!!!
-  console.log("createCharRoom get call!!!");
+  // console.log("createCharRoom get call!!!");
   const uid_one = db.ref(`Users/${uid_1}/username`).once('value');
   const uid_two = db.ref(`Users/${uid_2}/username`).once('value');
 
@@ -90,14 +90,14 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
   var tmp = []
   var ret = []
   currentChat.forEach(c =>{
-    // console.log(c)
-    if(c.user1.userId === uid){
+    console.log(c)
+    if(c.user1.userId == uid){
       tmp.push({
         name:c.user2.username,
         uid:c.user2.userId,
         chatId:c['.key']
       })
-    }else if(c.user2.userId === uid){
+    }else{
       tmp.push({
         name:c.user1.username,
         uid:c.user1.userId,
@@ -105,23 +105,29 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
       })
     }
   })
-  for(let i = tmp.length-1; i >= 0; i--){
-    ret.push(tmp[i])
-  }
-  // console.log(ret)
-  return ret
+  // for(let i = tmp.length-1; i >= 0; i--){
+  //   ret.push(tmp[i])
+  // }
+  console.log(tmp)
+  return tmp
 }
 export const getMessagesData = (dataFromDB, c_id, uid)=>{
-  console.log(dataFromDB['0'])
-
+  // console.log(c_id)
+  // console.log(dataFromDB)
   if(dataFromDB['0'] == null){
     console.log('dataFrom is Null')
     return;
   }
+  var target;
+  dataFromDB.forEach(e=>{
+    if(e['.key'] == c_id){
+      target = e
+    }
+  })
   var ret = []
   var type;
-  console.log(dataFromDB['0'].message)
-  dataFromDB['0'].message.forEach(messageObj=>{
+  // console.log(dataFromDB['0'].message)
+  target.message.forEach(messageObj=>{
 
     if(messageObj.sender === uid){
       type = 'sent'
