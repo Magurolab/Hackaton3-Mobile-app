@@ -3,7 +3,7 @@
     <f7-navbar title="Alibaybay" sliding />
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar>
-      <f7-link tab-link="#home" active><f7-icon material="cake"></f7-icon></f7-link>
+      <f7-link tab-link="#home" active><f7-icon f7="bars"></f7-icon></f7-link>
       <f7-link tab-link="#buy"><f7-icon f7="home_fill"></f7-icon></f7-link>
       <f7-link tab-link="#wishlist"><f7-icon f7="heart_fill"></f7-icon></f7-link>
       <f7-link tab-link="#additem"><f7-icon f7="add_around"></f7-icon></f7-link>

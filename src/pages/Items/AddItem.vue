@@ -8,13 +8,16 @@
         <f7-input @input="name = $event.target.value" type="text" placeholder="Name" required validate></f7-input>
       </f7-list-item>
 
-      <f7-list-item>
-        <div>
-          <f7-label>Photo</f7-label>
-          <p>My File Selector: <file-select v-model="file"></file-select></p>
-          <p v-if="file">{{file.name}}</p>
-        </div>
-      </f7-list-item>
+      <!--<f7-list-item>-->
+        <!--&lt;!&ndash;<f7&ndash;&gt;-->
+      <!--</f7-list-item>-->
+
+      <f7-block>
+        <f7-label>Photo</f7-label>
+        <br/>
+        <file-select v-model="file"></file-select>
+        <p v-if="file">{{file.name}}</p>
+      </f7-block>
 
       <f7-list-item>
         <f7-label>Category</f7-label>
@@ -60,9 +63,11 @@ import Vue from 'vue'
 import {auth,db, storage} from "../../firebase";
 import FileSelect from './FileSelect'
 import firebase from 'firebase'
+import F7Block from "framework7-vue/src/components/block";
 
 export default {
   components: {
+    F7Block,
     F7BlockFooter,
     F7Label,
     F7Button,
