@@ -58,7 +58,7 @@
   </f7-view>
 </template>
 <script>
-  import { createMessage } from './MessageSyetem/MessageUtils.js'
+  import { createMessage, getMessagesData } from './MessageSyetem/MessageUtils.js'
   import { auth,db }from './../../firebase.js'
   import F7Button from "framework7-vue/src/components/button";
   import F7Icon from "framework7-vue/src/components/icon";
@@ -69,7 +69,7 @@
     props:['c_id','targetName','targetId'],
     data() {
       return {
-        title: "Talking to ",
+        title: "Talking to df",
         attachments: [],
         sheetVisible: false,
         // Sheet images available
@@ -113,17 +113,16 @@
     },
     watch:{
       targetName: function () {
-        this.title = this.title + this.targetName
+        this.title = "Talking to "+ this.targetName
       },
       c_id:function(){
-        this.dataFromDB = db.ref('ChatRooms/'+this.c_id)
-        console.log(this.dataFromDB)
+        console.log("Yooo c_id")
+        const currentUserId = auth.currentUser.uid;
+        this.messagesData = getMessagesData(this.dataFromDB, this.c_id, currentUserId)
       },
-      dataFromDB: function() {
-
-        // make it a proper messagesData
+      dataFromDB:function(){
+        this.messagesData = getMessagesData(this.dataFromDB, this.c_id)
       }
-
     },
     computed: {
       attachmentsVisible() {
@@ -160,8 +159,11 @@
         // the rest of logic to send a message
 
         const senderId = auth.currentUser.uid
-        const roomId = null // need to get it by passing it in.
-        // createMessage(auth.currentUser.username,senderId, roomId, text);
+        if(text === ''){
+          return;
+        }
+        createMessage(senderId, this.c_id, text);
+        // self.attachments = ''
         console.log("chatBox c_id= "+this.c_id)
         console.log('targetName= '+this.targetName)
         console.log('targetId= '+this.targetId)

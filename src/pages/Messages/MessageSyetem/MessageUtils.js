@@ -1,13 +1,17 @@
 const date = new Date();
 import { db }  from '../../../firebase.js'
 
-export const createChatRoom = (uid_1, uid_2) => {
+export const createChatRoom = async (uid_1, uid_2) => {
+  //to call...
+  //const ret = await createChatRoom(...)
+  // cannot get Room ID!!!!
   console.log("createCharRoom get call!!!");
   const uid_one = db.ref(`Users/${uid_1}/username`).once('value');
   const uid_two = db.ref(`Users/${uid_2}/username`).once('value');
-  Promise.all([uid_one, uid_two])
+
+  return Promise.all([uid_one, uid_two])
     .then(([one, two]) => {
-      return db.ref(`ChatRooms/`).push(
+      const tmp = db.ref(`ChatRooms/`).push(
         {
           user1: {
             userId: uid_1,
@@ -19,6 +23,7 @@ export const createChatRoom = (uid_1, uid_2) => {
           }
         }
       )
+      return tmp
     })
     .then(({key: ChatRoomId}) => {
       db.ref('Users/'+uid_1)
@@ -43,19 +48,18 @@ export const createChatRoom = (uid_1, uid_2) => {
             }
           }
         )
-      return key
-    })
+      return ChatRoomId;
+    });
 }
 
-export const createMessage = (senderName,senderId, roomId,newMessageText) =>{
+export const createMessage = (senderId, roomId,newMessageText) =>{
   console.log("creteMessage get call")
   const NewMessage = {
     text: newMessageText,
     date: date.toLocaleString(),
     sender: senderId,
-    name: senderName
   }
-  db.ref('ChatRooms/'+roomId+'/MessagePool').transaction(currentMessages => {
+  db.ref('ChatRooms/'+roomId+'/message').transaction(currentMessages => {
     if(currentMessages ===  null){
       return [NewMessage]
     }else{
@@ -105,6 +109,33 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
     ret.push(tmp[i])
   }
   // console.log(ret)
+  return ret
+}
+export const getMessagesData = (dataFromDB, c_id, uid)=>{
+  console.log(dataFromDB['0'])
+
+  if(dataFromDB['0'] == null){
+    console.log('dataFrom is Null')
+    return;
+  }
+  var ret = []
+  var type;
+  console.log(dataFromDB['0'].message)
+  dataFromDB['0'].message.forEach(messageObj=>{
+
+    if(messageObj.sender === uid){
+      type = 'sent'
+    }
+    else{
+      type='received'
+    }
+    const msg = {
+      type: type,
+      text: messageObj.text
+    }
+    ret.push(msg)
+
+    })
   return ret
 }
 export const deleteChat = (chatId) =>{
