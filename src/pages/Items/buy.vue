@@ -3,9 +3,9 @@
     <f7-list>
       <f7-card v-for="card in displayCards">
         <f7-card-header>
-          {{card.user}}
-          <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
-          <f7-button @click="addWishlist(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
+          <b>{{card.user}}</b>
+            <f7-button @click="redirect(card.userid)" ><f7-icon material="send"></f7-icon></f7-button>
+            <f7-button @click="addWishlist(card['.key'])"><f7-icon f7="heart_fill" ></f7-icon></f7-button>
         </f7-card-header>
         <f7-card-content>
           <img :src="card.url" width="100%"/>
@@ -13,7 +13,7 @@
         <f7-card-footer>
           {{"Item: " + card.name}}
           <br/>
-          {{"$"+card.price}}
+          {{"‎฿ "+card.price}}
           <br/>
           {{"Description: " + card.description}}
         </f7-card-footer>
@@ -82,10 +82,6 @@
         console.log(chatId)
         createMessage(user1_id, chatId, text)
         this.$f7.dialog.alert("Your chat room has been created.", '')
-        // this.$f7router.navigate("/inbox/")
-        // location.reload()
-
-
       },
       addWishlist (id) {
         const uid = auth.currentUser.uid

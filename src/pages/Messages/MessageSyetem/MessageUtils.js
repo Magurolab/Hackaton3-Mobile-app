@@ -74,7 +74,7 @@ export const getCurrentChats = (uid, chatId_lst, allChat) =>{
   for (let i = 0; i < chatId_lst.length; i++) {
     for(let j = 0; j< allChat.length; j++){
       if(chatId_lst[i]['.value'] === allChat[j]['.key']){
-        currentChats.push(allChat[i])
+        currentChats.push(allChat[j])
         break;
       }
     }
