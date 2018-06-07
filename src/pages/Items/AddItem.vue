@@ -4,15 +4,6 @@
 
     <f7-list form>
       <f7-list-item>
-          <!--{{this.currentuser.email}}-->
-        <!--<br/>-->
-          <!--{{this.currentuser.uid}}-->
-          <br/>
-          <!--{{this.currentuser.university}}-->
-
-      </f7-list-item>
-
-      <f7-list-item>
         <f7-label>Item Name</f7-label>
         <f7-input @input="name = $event.target.value" type="text" placeholder="Name" required validate></f7-input>
       </f7-list-item>
@@ -49,19 +40,12 @@
       <f7-list>
         <f7-block-footer>
           <f7-button
-            @click="myURI"
-          > URI </f7-button>
-          <f7-button
             @click="addProduct"
             class="col"
             fill >SELL IT!</f7-button>
         </f7-block-footer>
       </f7-list>
     </f7-list>
-    <div v-for="(pluginTest, plugin) in plugins" :class="{ ok: pluginEnabled(plugin) }" @click="pluginTest">
-      <span></span>{{ plugin }}
-    </div>
-    <div v-if="cordova">{{ cordova }}</div>
 
   </f7-page>
 </template>
@@ -69,7 +53,6 @@
 <script>
 import F7List from "framework7-vue/src/components/list";
 import F7ListItem from "framework7-vue/src/components/list-item";
-// import FileSelect from './../../components/Items/FileSelect'
 import F7Button from "framework7-vue/src/components/button";
 import F7Label from "framework7-vue/src/components/label";
 import F7BlockFooter from "framework7-vue/src/components/block-footer";
@@ -193,8 +176,8 @@ export default {
       })
     },
   },
-  // created: function () {
+  created: function () {
     // console.log('current user on profile', auth.currentUser.email)
-  // },
+  },
 }
 </script>

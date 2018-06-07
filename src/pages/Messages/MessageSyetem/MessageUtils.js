@@ -1,13 +1,17 @@
 const date = new Date();
 import { db }  from '../../../firebase.js'
 
-export const createChatRoom = (uid_1, uid_2) => {
+export const createChatRoom = async (uid_1, uid_2) => {
+  //to call...
+  //const ret = await createChatRoom(...)
+  // cannot get Room ID!!!!
   console.log("createCharRoom get call!!!");
   const uid_one = db.ref(`Users/${uid_1}/username`).once('value');
   const uid_two = db.ref(`Users/${uid_2}/username`).once('value');
-  Promise.all([uid_one, uid_two])
+
+  return Promise.all([uid_one, uid_two])
     .then(([one, two]) => {
-      return db.ref(`ChatRooms/`).push(
+      const tmp = db.ref(`ChatRooms/`).push(
         {
           user1: {
             userId: uid_1,
@@ -19,6 +23,7 @@ export const createChatRoom = (uid_1, uid_2) => {
           }
         }
       )
+      return tmp
     })
     .then(({key: ChatRoomId}) => {
       db.ref('Users/'+uid_1)
@@ -43,7 +48,8 @@ export const createChatRoom = (uid_1, uid_2) => {
             }
           }
         )
-    })
+      return ChatRoomId;
+    });
 }
 
 export const createMessage = (senderId, roomId,newMessageText) =>{
@@ -51,9 +57,9 @@ export const createMessage = (senderId, roomId,newMessageText) =>{
   const NewMessage = {
     text: newMessageText,
     date: date.toLocaleString(),
-    sender: senderId
+    sender: senderId,
   }
-  db.ref('ChatRooms/'+roomId+'/MessagePool').transaction(currentMessages => {
+  db.ref('ChatRooms/'+roomId+'/message').transaction(currentMessages => {
     if(currentMessages ===  null){
       return [NewMessage]
     }else{
@@ -73,8 +79,8 @@ export const getCurrentChats = (uid, chatId_lst, allChat) =>{
       }
     }
   }
-  console.log('about to return')
-  console.log(currentChats)
+  // console.log('about to return')
+  // console.log(currentChats)
   if(currentChats.length === 0){
     return null
   }
@@ -88,11 +94,13 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
     if(c.user1.userId === uid){
       tmp.push({
         name:c.user2.username,
+        uid:c.user2.userId,
         chatId:c['.key']
       })
     }else if(c.user2.userId === uid){
       tmp.push({
         name:c.user1.username,
+        uid:c.user1.userId,
         chatId:c['.key']
       })
     }
@@ -102,4 +110,34 @@ export const getInboxRenderComponent = (uid, currentChat) =>{
   }
   // console.log(ret)
   return ret
+}
+export const getMessagesData = (dataFromDB, c_id, uid)=>{
+  console.log(dataFromDB['0'])
+
+  if(dataFromDB['0'] == null){
+    console.log('dataFrom is Null')
+    return;
+  }
+  var ret = []
+  var type;
+  console.log(dataFromDB['0'].message)
+  dataFromDB['0'].message.forEach(messageObj=>{
+
+    if(messageObj.sender === uid){
+      type = 'sent'
+    }
+    else{
+      type='received'
+    }
+    const msg = {
+      type: type,
+      text: messageObj.text
+    }
+    ret.push(msg)
+
+    })
+  return ret
+}
+export const deleteChat = (chatId) =>{
+  console.log('deleting chat')
 }

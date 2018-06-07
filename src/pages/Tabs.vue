@@ -1,7 +1,6 @@
 <template>
   <f7-page tabbar-fixed with-subnavbar>
     <f7-navbar title="Alibaybay" sliding />
-
     <!-- iOS TabBar has icons, Material TabBar does not -->
     <f7-toolbar tabbar>
       <f7-link tab-link="#home" active><f7-icon material="cake"></f7-icon></f7-link>

@@ -1,0 +1,5 @@
+1. getChatid from Buy page, right now I cant since it is promise shit happening
+2. make it an initial message eg. 'hey I want your shit'
+3. go back to utils make a utils that can extract message
+4. render it.
+5. fox the back button

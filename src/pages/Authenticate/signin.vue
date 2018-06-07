@@ -57,7 +57,7 @@
         auth.signInWithEmailAndPassword(this.email,this.password)
           .then(authUser => {
             this.$f7router.navigate('/')
-            // location.reload(true)
+            location.reload(true)
           })
           .catch(authError => {
             this.$f7.dialog.alert(authError, '')
